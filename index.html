@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Estudio Rosco — Arquitectura, render y proyecto en Ciudad de México</title>
+<meta name="description" content="Estudio Rosco: visualización arquitectónica, planos, conceptualización y recorridos virtuales en Ciudad de México. Ayudamos a ver el proyecto antes de construirlo.">
+<meta name="theme-color" content="#F4F0E6">
+<meta property="og:title" content="Estudio Rosco — Arquitectura y visualización">
+<meta property="og:description" content="Renderizado, planos, conceptualización y recorridos virtuales en Ciudad de México.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://roscoestudio.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,400;1,9..144,500&family=Jost:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAFAF8;
+  --cream-2:#EAE8E3;
+  --ink:#141311;
+  --ink-soft:#5A584F;
+  --brass:#141311;
+  --brass-soft:#8C897D;
+  --line:#D9D6CE;
+  --white:#F7F4EC;
+  --dark-bg:#141311;
+  --dark-text:#FAFAF8;
+  --dark-text-soft:#8C897D;
+  --hover-nav:#6B6E3E;
+  --hover-servicios:#6B6E3E;
+  --hover-proyectos:#AC9F81;
+  --hover-contacto:#9FAA8A;
+  --hover-estudio:#9FAA8A;
+  --r:0px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --dur:.7s;
+  --font-scale:1;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Inter',-apple-system,sans-serif;
+  font-size:calc(var(--font-scale) * 16px);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition:background .4s var(--ease);
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+ul{list-style:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+@media(min-width:780px){.wrap{padding:0 56px}}
+
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+.eyebrow{
+  font-family:'Jost',sans-serif;
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--brass);
+  font-weight:500;
+}
+h1,h2,h3{font-weight:400;color:var(--ink)}
+.serif{font-family:'Fraunces',serif}
+.hr{height:1px;background:var(--line);border:none}
+
+/* reveal-on-scroll */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.reveal.in{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+.project-grid .project-card:nth-child(1){transition-delay:0s}
+.project-grid .project-card:nth-child(2){transition-delay:.08s}
+.project-grid .project-card:nth-child(3){transition-delay:.16s}
+.project-grid .project-card:nth-child(4){transition-delay:.24s}
+.project-grid .project-card:nth-child(5){transition-delay:.32s}
+.project-grid .project-card:nth-child(6){transition-delay:.4s}
+.servicios .service-row:nth-child(1){transition-delay:0s}
+.servicios .service-row:nth-child(2){transition-delay:.06s}
+.servicios .service-row:nth-child(3){transition-delay:.12s}
+.servicios .service-row:nth-child(4){transition-delay:.18s}
+.servicios .service-row:nth-child(5){transition-delay:.24s}
+.servicios .service-row:nth-child(6){transition-delay:.3s}
+
+/* ---------- SKIP LINK ---------- */
+.skip{position:absolute;left:-999px;top:0;background:#141311;color:#FAFAF8;padding:12px 20px;z-index:999;font-family:'Jost',sans-serif;letter-spacing:.05em}
+.skip:focus{left:16px;top:16px}
+
+/* ---------- INTRO SPLASH ---------- */
+.intro-splash{position:fixed;inset:0;background:#000;z-index:999;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .8s var(--ease)}
+.intro-splash.hide{opacity:0;pointer-events:none}
+.intro-text{font-family:'Fraunces',serif;font-style:italic;font-weight:300;color:#fff;font-size:clamp(26px,6.5vw,58px);letter-spacing:.03em;opacity:0;transform:translateY(14px);animation:introReveal 1.1s var(--ease) .3s forwards}
+@keyframes introReveal{to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.intro-splash{display:none}}
+
+/* ---------- MARK (logo icon) ---------- */
+.mark{display:block;opacity:0;transform:scale(.85);transition:opacity .6s var(--ease) .15s,transform .6s var(--ease) .15s}
+.mark.draw{opacity:1;transform:scale(1)}
+.mark path,.mark rect{fill:currentColor;stroke:none}
+
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:60;
+  background:color-mix(in srgb,var(--cream) 86%,transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  transition:background .6s var(--ease);
+}
+header:hover{background:color-mix(in srgb,var(--cream) 75%,var(--hover-nav) 25%)}
+body.hover-tint-off header:hover{background:color-mix(in srgb,var(--cream) 86%,transparent)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand-lockup{display:flex;align-items:center;gap:12px}
+.brand-lockup .mark{width:28px;height:28px;color:var(--ink);transition:color .35s var(--ease)}
+.brand-lockup:hover .mark,.brand-lockup:focus-visible .mark{color:#6B6E3E}
+.brand-name{font-family:'Jost',sans-serif;font-size:16px;letter-spacing:.24em;font-weight:500}
+.brand-name small{display:block;font-size:9px;letter-spacing:.3em;color:var(--ink-soft);font-weight:400;margin-top:2px}
+
+.nav-links{display:none;gap:36px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.08em}
+.nav-links a{position:relative;padding:4px 0}
+.nav-links a::after{content:'';position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--brass);transition:right .35s var(--ease)}
+.nav-links a:hover::after,.nav-links a:focus-visible::after{right:0}
+.nav-links li:nth-child(1) a::after{background:#6B6E3E}
+.nav-links li:nth-child(1) a:hover,.nav-links li:nth-child(1) a:focus-visible{color:#6B6E3E}
+.nav-links li:nth-child(2) a::after{background:#AC9F81}
+.nav-links li:nth-child(2) a:hover,.nav-links li:nth-child(2) a:focus-visible{color:#AC9F81}
+.nav-links li:nth-child(3) a::after{background:#9FAA8A}
+.nav-links li:nth-child(3) a:hover,.nav-links li:nth-child(3) a:focus-visible{color:#9FAA8A}
+.nav-links li:nth-child(4) a::after{background:#6B6E3E}
+.nav-links li:nth-child(4) a:hover,.nav-links li:nth-child(4) a:focus-visible{color:#6B6E3E}
+@media(min-width:900px){.nav-links{display:flex}}
+
+.lang-toggle{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.1em;border:1px solid var(--line);padding:6px 12px;color:var(--ink);margin-left:20px;transition:border-color .3s var(--ease),color .3s var(--ease)}
+.lang-toggle:hover,.lang-toggle:focus-visible{border-color:#9FAA8A;color:#9FAA8A}
+
+.menu-btn{display:flex;flex-direction:column;gap:5px;width:30px;z-index:120;margin-left:16px}
+@media(min-width:900px){.menu-btn{display:none}}
+.menu-btn span{display:block;height:1px;background:var(--ink);transition:transform .3s var(--ease),opacity .3s var(--ease)}
+.menu-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu-btn.open span:nth-child(2){opacity:0}
+.menu-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;inset:0;background:var(--cream);z-index:100;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:28px;
+  padding:24px;
+  transform:translateY(-100%);transition:transform .5s var(--ease);
+}
+.mobile-menu.open{transform:translateY(0)}
+.mobile-menu a{font-family:'Fraunces',serif;font-style:italic;font-size:38px;font-weight:400;transition:color .3s var(--ease)}
+.mobile-menu a:nth-of-type(1):hover{color:#6B6E3E}
+.mobile-menu a:nth-of-type(2):hover{color:#AC9F81}
+.mobile-menu a:nth-of-type(3):hover{color:#9FAA8A}
+.mobile-menu a:nth-of-type(4):hover{color:#6B6E3E}
+.mobile-menu .wrap{width:100%}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:76px}
+.hero-media{position:absolute;inset:0;overflow:hidden}
+.hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);filter:grayscale(1);transition:transform 1.6s var(--ease),filter .8s var(--ease)}
+.hero.loaded .hero-media img{transform:scale(1)}
+.hero:hover .hero-media img,.hero:focus-within .hero-media img{filter:grayscale(0)}
+.hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,7,.05) 0%,rgba(10,9,7,.55) 100%)}
+.hero-content{position:relative;color:var(--white);padding:0 0 64px}
+.hero-content .eyebrow{color:var(--brass-soft);display:inline-block}
+.hero-statement{position:absolute;left:24px;right:24px;top:120px;max-width:30ch;text-align:left;font-family:'Fraunces',serif;font-size:calc(var(--font-scale) * clamp(18px,2.6vw,24px));line-height:1.42;color:#EDE7D8;z-index:2;text-shadow:0 1px 12px rgba(10,9,7,.35)}
+.hero-statement .accent{color:var(--brass-soft)}
+@media(min-width:640px){.hero-statement{left:auto;right:56px;top:150px;bottom:auto;text-align:right}}
+.hero-title{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:calc(var(--font-scale) * clamp(34px,7.5vw,76px));line-height:1.06;letter-spacing:-.01em;max-width:14ch;margin:18px 0 22px;color:#FFFFFF}
+.hero-sub{font-family:'Jost',sans-serif;font-size:calc(var(--font-scale) * 13px);letter-spacing:.1em;max-width:40ch;color:#EDE7D8}
+.scroll-cue{position:absolute;bottom:24px;right:24px;color:var(--white);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.2em}
+.scroll-cue .line{width:1px;height:36px;background:rgba(255,255,255,.6);overflow:hidden}
+.scroll-cue .line i{display:block;width:100%;height:50%;background:#fff;animation:cue 1.8s infinite var(--ease)}
+@keyframes cue{0%{transform:translateY(-100%)}100%{transform:translateY(200%)}}
+@media(prefers-reduced-motion:reduce){.scroll-cue .line i{animation:none}}
+
+/* ---------- PAGE NAVIGATION SYSTEM ---------- */
+.page{display:none;opacity:0;transition:opacity .7s var(--ease);position:relative}
+.page.active{display:block}
+.page.visible{opacity:1}
+@media(prefers-reduced-motion:reduce){.page{transition:none}}
+.page-bg{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--cream-2)}
+.page-bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(.85) blur(0px);opacity:.5;transform:scale(1.04);transition:filter 1.1s var(--ease),opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.page:hover .page-bg img{filter:grayscale(0) blur(7px);opacity:.8;transform:scale(1.09)}
+@media(prefers-reduced-motion:reduce){.page-bg img{transition:none;transform:none}}
+
+/* ---------- SECTION SPACING ---------- */
+section{padding:96px 0;background:color-mix(in srgb,var(--cream) 68%,transparent);position:relative;z-index:1;transition:background .6s var(--ease)}
+@media(min-width:900px){section{padding:140px 0}}
+.servicios:hover{background:color-mix(in srgb,var(--cream) 55%,var(--hover-servicios) 22%)}
+#proyectos:hover{background:color-mix(in srgb,var(--cream) 55%,var(--hover-proyectos) 22%)}
+body.hover-tint-off .servicios:hover,body.hover-tint-off #proyectos:hover{background:color-mix(in srgb,var(--cream) 68%,transparent)}
+#estudio:hover{background:color-mix(in srgb,var(--cream) 55%,var(--hover-estudio) 22%)}
+body.hover-tint-off #estudio:hover{background:color-mix(in srgb,var(--cream) 68%,transparent)}
+.section-head{margin-bottom:48px}
+.section-head .eyebrow{margin-bottom:14px;display:block;font-size:13px}
+.section-head h2{font-family:'Fraunces',serif;font-size:calc(var(--font-scale) * clamp(42px,8vw,92px));max-width:16ch;line-height:1.02}
+
+
+/* ---------- STATEMENT ---------- */
+
+/* ---------- SERVICIOS ---------- */
+.service-row{
+  display:grid;grid-template-columns:1fr;gap:14px;
+  padding:28px 0 28px 18px;border-top:1px solid var(--line);
+  border-left:2px solid transparent;margin-left:-18px;
+  transition:padding .4s var(--ease),border-color .35s var(--ease);
+}
+.servicios .service-row:last-child{border-bottom:1px solid var(--line)}
+@media(min-width:780px){
+  .service-row{grid-template-columns:90px 1fr 1.1fr;align-items:start;gap:24px}
+}
+.service-num{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.1em;color:var(--brass);transition:color .3s var(--ease)}
+.service-row h3{font-family:'Fraunces',serif;font-size:calc(var(--font-scale) * clamp(22px,3vw,30px))}
+.service-row p{color:var(--ink-soft);font-size:calc(var(--font-scale) * 15px);max-width:46ch}
+.service-row:hover{border-left-color:var(--hover-servicios)}
+.service-row:hover .service-num{color:var(--hover-servicios)}
+
+/* ---------- PROYECTOS ---------- */
+.project-grid{display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:780px){.project-grid{grid-template-columns:1fr 1fr;gap:32px 28px}}
+.project-card{cursor:pointer;border:none;background:none;text-align:left;width:100%;font:inherit;color:inherit}
+.project-thumb{position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--cream-2)}
+.project-thumb img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:transform .9s var(--ease),filter .6s var(--ease)}
+.project-card:hover .project-thumb img,.project-card:focus-visible .project-thumb img{transform:scale(1.06);filter:grayscale(0)}
+.project-thumb .mark{position:absolute;top:18px;right:18px;width:26px;height:26px;color:var(--white);opacity:0;transition:opacity .4s var(--ease)}
+.project-card:hover .project-thumb .mark,.project-card:focus-visible .project-thumb .mark{opacity:1}
+.project-meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:18px;gap:12px}
+.project-meta h3{transition:color .3s var(--ease)}
+.project-card:hover .project-meta h3,.project-card:focus-visible .project-meta h3{color:#AC9F81}
+.project-meta h3{font-family:'Fraunces',serif;font-size:calc(var(--font-scale) * 22px)}
+.project-meta span{font-family:'Jost',sans-serif;font-size:calc(var(--font-scale) * 11px);letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase;white-space:nowrap}
+
+/* ---------- ESTUDIO ---------- */
+.estudio-grid{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+@media(min-width:900px){.estudio-grid{grid-template-columns:1fr 1fr;gap:80px}}
+.estudio-img{aspect-ratio:3/4;overflow:hidden;background:var(--cream-2)}
+.estudio-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter .8s var(--ease)}
+.estudio-img:hover img,.estudio-img:focus-within img{filter:grayscale(0)}
+.estudio-text p{color:var(--ink-soft);margin-bottom:18px;max-width:48ch}
+.estudio-text p:first-of-type{font-family:'Fraunces',serif;font-size:calc(var(--font-scale) * 22px);color:var(--ink)}
+
+/* ---------- CONTACTO ---------- */
+.contacto{background:color-mix(in srgb,var(--dark-bg) 55%,transparent);color:var(--dark-text);position:relative;z-index:1;transition:background .6s var(--ease)}
+.contacto:hover{background:color-mix(in srgb,var(--dark-bg) 48%,var(--hover-contacto) 20%)}
+body.hover-tint-off .contacto:hover{background:color-mix(in srgb,var(--dark-bg) 55%,transparent)}
+.contacto .eyebrow{color:var(--brass-soft)}
+.contacto h2{color:var(--dark-text)}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:900px){.contact-grid{grid-template-columns:1fr 1fr;gap:80px}}
+.contact-list a, .contact-list span{display:block;font-family:'Fraunces',serif;font-style:italic;font-size:calc(var(--font-scale) * clamp(20px,3vw,28px));padding:14px 0;border-bottom:1px solid color-mix(in srgb,var(--dark-text) 18%,transparent)}
+.contact-list a{transition:color .3s var(--ease)}
+.contact-list a:hover,.contact-list a:focus-visible{color:#9FAA8A}
+.contact-list .label{font-family:'Jost',sans-serif;font-style:normal;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dark-text-soft);display:block;margin-bottom:4px;border:none;padding:0}
+
+.form-field{margin-bottom:20px}
+.form-field label{display:block;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dark-text-soft);margin-bottom:8px}
+.form-field input,.form-field textarea{
+  width:100%;background:transparent;border:none;border-bottom:1px solid color-mix(in srgb,var(--dark-text) 30%,transparent);
+  color:var(--dark-text);font-family:'Inter',sans-serif;font-size:16px;padding:10px 0;resize:vertical;
+}
+.form-field input:focus,.form-field textarea:focus{outline:none;border-color:var(--brass-soft)}
+.form-field input::placeholder,.form-field textarea::placeholder{color:var(--dark-text-soft)}
+.btn-send{
+  margin-top:8px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  padding:16px 32px;border:1px solid var(--brass-soft);color:var(--dark-text);
+  transition:background .3s var(--ease),color .3s var(--ease);
+}
+.btn-send:hover,.btn-send:focus-visible{background:#9FAA8A;color:var(--dark-bg)}
+
+/* ---------- FOOTER ---------- */
+footer{padding:36px 0;background:var(--dark-bg);color:var(--dark-text-soft);cursor:default}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.08em}
+.foot-row .mark{width:18px;height:18px;color:var(--dark-text-soft)}
+#footerLine{display:inline-block}
+
+/* ---------- LIGHTBOX ---------- */
+.lightbox{position:fixed;inset:0;background:color-mix(in srgb,var(--dark-bg) 92%,transparent);z-index:200;display:none;overflow-y:auto;padding:24px 0 80px}
+.lightbox.open{display:block}
+.lb-close{position:fixed;top:20px;right:20px;color:var(--dark-text);width:42px;height:42px;border:1px solid color-mix(in srgb,var(--dark-text) 30%,transparent);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:5;background:color-mix(in srgb,var(--dark-bg) 60%,transparent)}
+.lb-inner{max-width:880px;margin:0 auto;padding:0 24px}
+.lb-cover{aspect-ratio:16/10;overflow:hidden;margin-bottom:32px;background:var(--cream-2);cursor:zoom-in}
+.lb-cover img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.lb-cover:hover img{transform:scale(1.03)}
+.lb-inner .eyebrow{color:var(--brass-soft)}
+.lb-inner h2{font-family:'Fraunces',serif;font-style:italic;color:var(--dark-text);font-size:clamp(28px,5vw,48px);margin:14px 0 22px}
+.lb-inner p{color:var(--dark-text-soft);max-width:60ch;margin-bottom:24px;font-size:16px;line-height:1.7}
+.lb-gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}
+.lb-gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;cursor:zoom-in;transition:opacity .3s var(--ease)}
+.lb-gallery img:hover{opacity:.85}
+
+/* ---------- IMAGE VIEWER ---------- */
+.img-viewer{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:250;display:none;align-items:center;justify-content:center;padding:20px}
+.img-viewer.open{display:flex}
+.img-viewer img{max-width:100%;max-height:100%;object-fit:contain}
+.iv-close{position:fixed;top:20px;right:20px;color:#fff;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(0,0,0,.4)}
+.iv-nav{position:fixed;top:50%;transform:translateY(-50%);color:#fff;width:48px;height:48px;border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:28px;background:rgba(0,0,0,.4);font-family:sans-serif}
+.iv-prev{left:16px}
+.iv-next{right:16px}
+@media(max-width:600px){.iv-nav{width:40px;height:40px;font-size:22px}}
+
+/* ---------- ADMIN PANEL ---------- */
+.admin-panel{position:fixed;inset:0;background:var(--cream);z-index:300;display:none;overflow-y:auto}
+.admin-panel.open{display:block}
+.admin-bar{position:sticky;top:0;background:var(--dark-bg);color:var(--dark-text);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.admin-bar h2{font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--dark-text)}
+.admin-bar button{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.08em;border:1px solid color-mix(in srgb,var(--dark-text) 30%,transparent);padding:8px 16px;color:var(--dark-text)}
+.admin-tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin:24px 24px 0}
+.admin-tab{padding:12px 18px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:2px solid transparent;color:var(--ink-soft)}
+.admin-tab.active{color:var(--ink);border-color:var(--brass)}
+.design-page-tab{padding:9px 16px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:20px;color:var(--ink-soft);background:transparent}
+.design-page-tab.active{color:var(--cream);background:var(--ink);border-color:var(--ink)}
+.admin-body{padding:24px;max-width:760px;margin:0 auto}
+.admin-section{display:none}
+.admin-section.active{display:block}
+.afield{margin-bottom:18px}
+.afield label{display:block;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
+.afield input,.afield textarea{width:100%;border:1px solid var(--line);background:var(--white);padding:10px 12px;font-family:'Inter',sans-serif;font-size:14px}
+.afield textarea{resize:vertical;min-height:80px}
+.afield small{display:block;color:var(--ink-soft);font-size:12px;margin-top:5px}
+
+/* ---------- DESIGN PREVIEW (mirrors live CSS vars) ---------- */
+.design-preview{border:1px solid var(--line);border-radius:2px;overflow:hidden;margin-bottom:8px}
+.dp-light{padding:22px 20px;background:var(--cream)}
+.dp-eyebrow{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.14em;color:var(--brass);margin-bottom:8px}
+.dp-heading{font-family:'Fraunces',serif;font-size:20px;color:var(--ink);margin-bottom:6px}
+.dp-body{font-family:'Inter',sans-serif;font-size:13px;color:var(--ink-soft)}
+.dp-dark{padding:20px;background:var(--dark-bg)}
+.dp-dark-heading{font-family:'Fraunces',serif;font-style:italic;font-size:17px;color:var(--dark-text);margin-bottom:6px}
+.dp-dark-body{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.1em;color:var(--dark-text-soft)}
+.abtn{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 22px;border:1px solid var(--ink);margin-right:10px;margin-top:6px;display:inline-block}
+.abtn.primary{background:var(--ink);color:var(--cream)}
+.abtn.danger{border-color:#9B4A3C;color:#9B4A3C}
+.admin-card{border:1px solid var(--line);padding:18px;margin-bottom:16px;background:var(--white)}
+.admin-card h4{font-family:'Fraunces',serif;font-size:18px;margin-bottom:4px}
+.admin-card .meta{font-size:12px;color:var(--ink-soft);margin-bottom:10px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--cream);padding:14px 24px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.04em;z-index:400;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- POSITION MODE ---------- */
+[data-draggable]{transition:outline-color .2s}
+body.position-mode [data-draggable]{cursor:grab;outline:1px dashed transparent;outline-offset:6px;border-radius:2px}
+body.position-mode [data-draggable]:hover{outline-color:var(--brass)}
+[data-draggable].dragging{cursor:grabbing;outline-color:var(--brass) !important;opacity:.88;position:relative;z-index:80}
+[data-draggable].pos-selected{outline:1px solid var(--brass) !important}
+.pos-toolbar{position:fixed;z-index:200;display:none;gap:6px;align-items:center;background:#141311;color:#FAFAF8;padding:7px 9px;border-radius:7px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.03em;box-shadow:0 8px 24px rgba(0,0,0,.3);white-space:nowrap}
+.pos-toolbar.show{display:flex}
+.pos-toolbar button{background:transparent;border:1px solid rgba(255,255,255,.3);color:inherit;border-radius:4px;padding:5px 9px;cursor:pointer;font-family:inherit;font-size:11px}
+.pos-toolbar button.active{background:#9FAA8A;border-color:#9FAA8A;color:#141311}
+.pos-toolbar button:hover{border-color:#fff}
+.pos-toolbar #posFontLabel{min-width:34px;text-align:center;opacity:.85}
+.pos-resize-handle{position:fixed;z-index:200;width:15px;height:15px;border-radius:50%;background:var(--brass);border:2px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.45);cursor:nwse-resize;display:none;touch-action:none}
+.pos-resize-handle.show{display:block}
+.img-preview{margin-top:8px;min-height:0}
+.img-preview img{display:block;max-height:110px;max-width:100%;border-radius:4px;border:1px solid var(--line)}
+.img-preview .img-error{font-family:'Jost',sans-serif;font-size:11px;color:#B5433A;background:color-mix(in srgb,#B5433A 10%,transparent);border:1px solid color-mix(in srgb,#B5433A 40%,transparent);border-radius:4px;padding:8px 10px}
+.pos-bar{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120%);
+  background:var(--dark-bg);color:var(--dark-text);display:flex;align-items:center;gap:16px;
+  padding:12px 18px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.04em;
+  z-index:150;transition:transform .35s var(--ease);max-width:92vw;flex-wrap:wrap;justify-content:center;
+  border:1px solid color-mix(in srgb,var(--dark-text) 20%,transparent);
+}
+.pos-bar.show{transform:translateX(-50%) translateY(0)}
+.pos-bar button{border:1px solid color-mix(in srgb,var(--dark-text) 30%,transparent);padding:7px 14px;color:var(--dark-text);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.04em;white-space:nowrap}
+.pos-bar button:hover{border-color:var(--brass-soft);color:var(--brass-soft)}
+
+/* ---------- WHATSAPP FLOAT ---------- */
+.wa-float{
+  position:fixed;right:20px;bottom:20px;z-index:70;
+  width:56px;height:56px;border-radius:50%;
+  background:var(--dark-bg);color:var(--dark-text);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.22);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s var(--ease),color .3s var(--ease);
+}
+.wa-float:hover,.wa-float:focus-visible{transform:scale(1.08);background:#6B6E3E;color:var(--dark-bg);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.wa-tip{
+  position:absolute;right:68px;top:50%;transform:translateY(-50%) translateX(6px);
+  background:var(--dark-bg);color:var(--dark-text);font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.04em;
+  padding:8px 14px;white-space:nowrap;opacity:0;pointer-events:none;
+  transition:opacity .3s var(--ease),transform .3s var(--ease);
+}
+.wa-float:hover .wa-tip,.wa-float:focus-visible .wa-tip{opacity:1;transform:translateY(-50%) translateX(0)}
+#igFloat{bottom:88px}
+#ttFloat{bottom:156px}
+@media(max-width:600px){.wa-tip{display:none}.wa-float{width:52px;height:52px;right:16px;bottom:16px}#igFloat{bottom:80px}#ttFloat{bottom:144px}}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Saltar al contenido</a>
+
+<div class="intro-splash" id="introSplash" aria-hidden="true">
+  <span class="intro-text">ESTUDIO ROSCO</span>
+</div>
+<script>
+  if(sessionStorage.getItem('rosco-intro-seen')){
+    document.getElementById('introSplash').style.display = 'none';
+  }
+</script>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="mark-svg" viewBox="0 0 58 96">
+    <rect x="29" y="0" width="3" height="64"/>
+    <path d="M32,14 A24,24 0 0 1 32,62 Z"/>
+    <path d="M29,62 A17,17 0 0 0 29,96 Z"/>
+    <path d="M56,64 A24,24 0 0 1 32,88 L32,80 A16,16 0 0 0 48,64 Z"/>
+  </symbol>
+</svg>
+
+<header>
+  <nav class="nav wrap" aria-label="Principal">
+    <a href="#main" class="brand-lockup" aria-label="Estudio Rosco, inicio">
+      <svg class="mark"><use href="#mark-svg"/></svg>
+      <span class="brand-name">ESTUDIO<small>ROSCO</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicios" data-i18n="navServicios">Servicios</a></li>
+      <li><a href="#proyectos" data-i18n="navProyectos">Proyectos</a></li>
+      <li><a href="#estudio" data-i18n="navEstudio">Estudio</a></li>
+      <li><a href="#contacto" data-i18n="navContacto">Contacto</a></li>
+    </ul>
+    <button class="lang-toggle" id="langToggle" aria-label="Cambiar a inglés / Switch to English">EN</button>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="wrap">
+    <a href="#servicios" data-close data-i18n="navServicios">Servicios</a><br><br>
+    <a href="#proyectos" data-close data-i18n="navProyectos">Proyectos</a><br><br>
+    <a href="#estudio" data-close data-i18n="navEstudio">Estudio</a><br><br>
+    <a href="#contacto" data-close data-i18n="navContacto">Contacto</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <div class="page active visible" id="page-inicio" data-page="inicio">
+  <section class="hero" id="hero">
+    <div class="hero-media">
+      <img id="heroImg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop" alt="Interior arquitectónico minimalista con luz natural, render fotorrealista de Estudio Rosco">
+    </div>
+    <div class="wrap hero-content">
+      <span class="eyebrow" id="heroEyebrow">Estudio Rosco — Ciudad de México</span>
+      <h1 class="hero-title" id="heroTitle">El espacio, visible antes de construirlo.</h1>
+      <p class="hero-sub" id="heroSub">RENDERIZADO · PLANOS · CONCEPTUALIZACIÓN · RECORRIDOS VIRTUALES</p>
+    </div>
+    <p class="hero-statement" id="statementText">No vendemos imágenes bonitas. <span class="accent">Ayudamos a decidir.</span> Cada render, plano y recorrido existe para que veas tu proyecto antes de construirlo.</p>
+    <div class="scroll-cue" aria-hidden="true"><span>SCROLL</span><span class="line"><i></i></span></div>
+  </section>
+  </div>
+
+  <div class="page" id="page-servicios" data-page="servicios">
+  <div class="page-bg"><img id="serviciosImg" src="https://images.unsplash.com/photo-1630920384437-53fba5b39dca?q=80&w=1800&auto=format&fit=crop" alt=""></div>
+  <section id="servicios" class="servicios">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" id="servEyebrow">Servicios</span>
+        <h2 id="servHeading">Lo que hacemos, de la idea al anteproyecto completo</h2>
+      </div>
+      <div id="serviceList"></div>
+    </div>
+  </section>
+  </div>
+
+  <div class="page" id="page-proyectos" data-page="proyectos">
+  <div class="page-bg"><img id="proyectosImg" src="https://images.unsplash.com/photo-1539778100343-71fcce08a31a?q=80&w=1800&auto=format&fit=crop" alt=""></div>
+  <section id="proyectos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" id="projEyebrow">Proyectos</span>
+        <h2 id="projHeading">Una selección, no un catálogo</h2>
+      </div>
+      <div class="project-grid" id="projectGrid"></div>
+    </div>
+  </section>
+  </div>
+
+  <div class="page" id="page-estudio" data-page="estudio">
+  <div class="page-bg"><img id="estudioImg" src="https://images.unsplash.com/photo-1503387837-b154d5074bd2?q=80&w=1800&auto=format&fit=crop" alt=""></div>
+  <section id="estudio">
+    <div class="wrap">
+      <div class="estudio-grid reveal">
+        <div class="estudio-img">
+          <img id="estudioPersonImg" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop" alt="Mesa de trabajo de arquitecto con planos y maqueta, estudio de diseño">
+        </div>
+        <div class="estudio-text">
+          <span class="eyebrow" id="estudioEyebrow">Estudio</span>
+          <div id="estudioText" style="margin-top:16px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="page" id="page-contacto" data-page="contacto">
+  <div class="page-bg"><img id="contactoImg" src="https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?q=80&w=1800&auto=format&fit=crop" alt=""></div>
+  <section id="contacto" class="contacto">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" id="contactEyebrow">Contacto</span>
+        <h2 id="contactHeading">Hablemos de tu proyecto</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-list reveal">
+          <span class="label" data-i18n="labelCorreo">Correo</span>
+          <a href="mailto:holaroscoestudio@gmail.com" id="contactEmailLink">holaroscoestudio@gmail.com</a>
+          <span class="label" style="margin-top:14px" data-i18n="labelTelefono">Teléfono</span>
+          <a href="tel:+525526995348" id="contactPhoneLink">55 2699 5348</a>
+          <span class="label" style="margin-top:14px">WhatsApp</span>
+          <a href="#" id="contactWhatsappLink" target="_blank" rel="noopener" data-i18n="waCta">Escríbeme directo</a>
+          <span class="label" style="margin-top:14px" id="igLabel">Instagram</span>
+          <a href="#" id="contactInstagramLink" target="_blank" rel="noopener" data-i18n="igCta">Síguenos</a>
+          <span class="label" style="margin-top:14px" id="ttLabel">TikTok</span>
+          <a href="#" id="contactTiktokLink" target="_blank" rel="noopener" data-i18n="ttCta">Síguenos</a>
+          <span class="label" style="margin-top:14px" data-i18n="labelUbicacion">Ubicación</span>
+          <span id="contactLocation">Ciudad de México, México</span>
+        </div>
+        <form class="reveal" id="contactForm" aria-label="Formulario de contacto">
+          <div class="form-field">
+            <label for="cf-name" data-i18n="formNombre">Nombre</label>
+            <input id="cf-name" name="name" type="text" placeholder="Tu nombre" required autocomplete="name" data-i18n-placeholder="placeholderNombre">
+          </div>
+          <div class="form-field">
+            <label for="cf-email" data-i18n="formCorreo">Correo</label>
+            <input id="cf-email" name="email" type="email" placeholder="tu@correo.com" required autocomplete="email" data-i18n-placeholder="placeholderCorreo">
+          </div>
+          <div class="form-field">
+            <label for="cf-msg" data-i18n="formMensaje">Cuéntame del proyecto</label>
+            <textarea id="cf-msg" name="message" rows="4" placeholder="Tipo de proyecto, ubicación, etapa actual…" required data-i18n-placeholder="placeholderMensaje"></textarea>
+          </div>
+          <button type="submit" class="btn-send" data-i18n="btnEnviar">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  </div>
+
+</main>
+
+<a class="wa-float" id="ttFloat" href="#" target="_blank" rel="noopener" aria-label="Síguenos en TikTok" style="display:none">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>
+  <span class="wa-tip">Síguenos en TikTok</span>
+</a>
+
+<a class="wa-float" id="igFloat" href="#" target="_blank" rel="noopener" aria-label="Síguenos en Instagram" style="display:none">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.25a3.25 3.25 0 1 1 0-6.5 3.25 3.25 0 0 1 0 6.5zM17.75 5.5a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0z"/></svg>
+  <span class="wa-tip">Síguenos en Instagram</span>
+</a>
+
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Escríbeme por WhatsApp">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.25.62 4.36 1.7 6.17L4 29l7.98-1.66a11.9 11.9 0 0 0 4.04.7h.01c6.62 0 12.02-5.4 12.02-12.02C28.05 8.4 22.65 3 16.02 3zm7.03 17.06c-.3.83-1.72 1.58-2.37 1.68-.6.1-1.36.14-2.2-.14-.5-.16-1.15-.38-1.98-.75-3.48-1.5-5.75-5-5.93-5.24-.17-.24-1.42-1.89-1.42-3.6 0-1.72.9-2.56 1.22-2.91.32-.35.7-.44.93-.44.24 0 .47 0 .68.01.22.01.51-.08.8.61.3.72 1.02 2.48 1.11 2.66.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.37-.16.73.21.36.94 1.55 2.02 2.51 1.39 1.24 2.56 1.62 2.93 1.8.36.18.57.15.79-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.8-.18.32.12 2.06.97 2.42 1.15.36.18.6.27.68.42.09.15.09.85-.21 1.68z"/></svg>
+  <span class="wa-tip">Escríbeme por WhatsApp</span>
+</a>
+
+<footer id="secretTrigger" style="cursor:default;-webkit-tap-highlight-color:transparent">
+  <div class="wrap foot-row">
+    <svg class="mark"><use href="#mark-svg"/></svg>
+    <span>© <span id="year"></span> <span id="footerLine">ESTUDIO ROSCO — ARQUITECTURA · DISEÑO · VISUALIZACIÓN</span></span>
+  </div>
+</footer>
+
+<div class="pos-bar" id="posBar" role="status">
+  <span>Modo mover — arrastra cualquier texto marcado con borde punteado</span>
+  <button id="resetPositions">Restablecer posiciones</button>
+  <button id="exitPositionMode">Salir</button>
+</div>
+
+<div class="pos-toolbar" id="posToolbar">
+  <button type="button" id="posFontMinus" title="Reducir tamaño de letra">A−</button>
+  <span id="posFontLabel">100%</span>
+  <button type="button" id="posFontPlus" title="Aumentar tamaño de letra">A+</button>
+  <button type="button" id="posJustifyBtn" title="Justificar texto">Justificar</button>
+  <button type="button" id="posClearBtn" title="Quitar tamaño y ancho personalizados">Restablecer este texto</button>
+</div>
+<div class="pos-resize-handle" id="posResizeHandle" title="Arrastra para cambiar el ancho"></div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Detalle de proyecto">
+  <button class="lb-close" id="lbClose" aria-label="Cerrar">✕</button>
+  <div class="lb-inner" id="lbContent"></div>
+</div>
+
+<div class="img-viewer" id="imgViewer" role="dialog" aria-modal="true" aria-label="Visor de imagen">
+  <button class="iv-close" id="ivClose" aria-label="Cerrar visor">✕</button>
+  <button class="iv-nav iv-prev" id="ivPrev" aria-label="Foto anterior">‹</button>
+  <img id="ivImg" src="" alt="">
+  <button class="iv-nav iv-next" id="ivNext" aria-label="Foto siguiente">›</button>
+</div>
+
+<div class="admin-panel" id="adminPanel" role="dialog" aria-modal="true" aria-label="Panel de edición de contenido">
+  <div class="admin-bar">
+    <h2>Editar contenido — Estudio Rosco</h2>
+    <button id="adminClose">Cerrar</button>
+  </div>
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="textos">Textos</button>
+    <button class="admin-tab" data-tab="ingles">Inglés</button>
+    <button class="admin-tab" data-tab="proyectos">Proyectos</button>
+    <button class="admin-tab" data-tab="diseno">Diseño</button>
+    <button class="admin-tab" data-tab="ayuda">Ayuda</button>
+  </div>
+  <div class="admin-body">
+
+    <div class="admin-section" id="tab-diseno">
+      <p style="color:var(--ink-soft);font-size:13px;margin-bottom:16px;max-width:56ch">Elige qué página quieres personalizar. Los colores y el tamaño de letra que cambies aquí solo afectan a esa página — las demás quedan igual.</p>
+
+      <div id="designPageTabs" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px">
+        <button type="button" class="design-page-tab" data-page="inicio">Inicio</button>
+        <button type="button" class="design-page-tab" data-page="servicios">Servicios</button>
+        <button type="button" class="design-page-tab" data-page="proyectos">Proyectos</button>
+        <button type="button" class="design-page-tab" data-page="estudio">Estudio</button>
+        <button type="button" class="design-page-tab" data-page="contacto">Contacto</button>
+      </div>
+
+      <div class="design-preview" id="designPreview">
+        <div class="dp-light">
+          <div class="dp-eyebrow">ACENTO PRINCIPAL</div>
+          <div class="dp-heading">Texto principal</div>
+          <div class="dp-body">Texto secundario, así se ve un párrafo normal del sitio.</div>
+        </div>
+        <div class="dp-dark">
+          <div class="dp-dark-heading">Sección oscura (solo aplica en Contacto)</div>
+          <div class="dp-dark-body">TEXTO SECUNDARIO OSCURO</div>
+        </div>
+      </div>
+
+      <p class="eyebrow" style="display:block;margin:20px 0 10px">Secciones claras — de esta página</p>
+      <div class="afield"><label>Fondo general</label><input type="color" id="d-bg" style="height:44px;padding:4px;cursor:pointer"><small>El color detrás de esta página, arriba en el recuadro.</small></div>
+      <div class="afield"><label>Fondo secundario</label><input type="color" id="d-bg2" style="height:44px;padding:4px;cursor:pointer"><small>Tarjetas de proyectos e imágenes mientras cargan.</small></div>
+      <div class="afield"><label>Texto principal</label><input type="color" id="d-text" style="height:44px;padding:4px;cursor:pointer"><small>Títulos y el texto que más se lee — "Texto principal" arriba.</small></div>
+      <div class="afield"><label>Texto secundario</label><input type="color" id="d-textsoft" style="height:44px;padding:4px;cursor:pointer"><small>Párrafos y descripciones — "Texto secundario" arriba.</small></div>
+      <div class="afield"><label>Líneas y bordes</label><input type="color" id="d-line" style="height:44px;padding:4px;cursor:pointer"><small>Las rayitas finas que separan secciones y tarjetas.</small></div>
+
+      <p class="eyebrow" style="display:block;margin:28px 0 10px">Acento — color de marca de esta página</p>
+      <div class="afield"><label>Acento principal</label><input type="color" id="d-brass" style="height:44px;padding:4px;cursor:pointer"><small>El color que más destaca: etiquetas, subrayados, cifras — "ACENTO PRINCIPAL" arriba.</small></div>
+      <div class="afield"><label>Acento claro</label><input type="color" id="d-brasssoft" style="height:44px;padding:4px;cursor:pointer"><small>Versión más suave, usada al pasar el cursor sobre botones y links.</small></div>
+
+      <p class="eyebrow" style="display:block;margin:28px 0 10px" id="darkSectionLabel">Fondo oscuro — solo se ve en Contacto</p>
+      <div class="afield"><label>Fondo oscuro</label><input type="color" id="d-darkbg" style="height:44px;padding:4px;cursor:pointer"><small>Fondo de Contacto (y del pie de página, que comparte este color).</small></div>
+      <div class="afield"><label>Texto sobre fondo oscuro</label><input type="color" id="d-darktext" style="height:44px;padding:4px;cursor:pointer"><small>Títulos dentro de esa sección oscura.</small></div>
+      <div class="afield"><label>Texto secundario sobre fondo oscuro</label><input type="color" id="d-darktextsoft" style="height:44px;padding:4px;cursor:pointer"><small>Etiquetas pequeñas ahí mismo, como "Correo" o "Teléfono".</small></div>
+
+      <p class="eyebrow" style="display:block;margin:28px 0 10px" id="hoverPageLabel">Iluminación al pasar el cursor — solo en esta página</p>
+      <div class="afield" id="hoverPageField"><label>Color al pasar el cursor sobre esta sección</label><input type="color" id="d-hoverpage" style="height:44px;padding:4px;cursor:pointer"></div>
+
+      <p class="eyebrow" style="display:block;margin:28px 0 10px">Tipografía — tamaño de letra de esta página</p>
+      <div class="afield">
+        <label>Tamaño de letra — <span id="fontScaleOut">100%</span></label>
+        <input type="range" id="d-font" min="0.85" max="1.3" step="0.01" value="1" style="width:100%">
+      </div>
+
+      <button class="abtn primary" id="saveDiseno">Guardar esta página</button>
+      <button class="abtn" id="resetDiseno">Restablecer esta página</button>
+
+      <hr class="hr" style="margin:36px 0 24px">
+      <p class="eyebrow" style="display:block;margin-bottom:14px">Ajustes globales — aplican a todo el sitio</p>
+      <div class="afield">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+          <input type="checkbox" id="d-hoverenabled" style="width:auto;height:auto" checked>
+          Activar el efecto de color al pasar el cursor
+        </label>
+        <small>Si lo desactivas, todas las páginas se quedan fijas en blanco y negro, sin reaccionar al cursor.</small>
+      </div>
+      <div class="afield"><label>Barra de navegación (arriba)</label><input type="color" id="d-hovernav" style="height:44px;padding:4px;cursor:pointer"><small>Color del menú de navegación, el mismo en todas las páginas.</small></div>
+      <button class="abtn" id="saveGlobalDesign">Guardar ajustes globales</button>
+    </div>
+
+    <div class="admin-section active" id="tab-textos">
+      <p class="eyebrow" style="display:block;margin-bottom:12px">Inicio</p>
+      <div class="afield"><label>Etiqueta superior (hero)</label><input id="f-heroEyebrow"></div>
+      <div class="afield"><label>Frase principal (hero)</label><textarea id="f-heroTitle"></textarea></div>
+      <div class="afield"><label>Línea de servicios (hero, debajo del título)</label><input id="f-heroSub"></div>
+      <div class="afield"><label>URL imagen de portada (hero)</label><input id="f-heroImg"><small>Pega un enlace directo a una imagen (termina en .jpg, .png o .webp). Los links de Google Imágenes, Pinterest, Instagram o Facebook casi nunca funcionan — usa un servicio como postimages.org o imgbb.com.</small><div class="img-preview" id="f-heroImg-preview"></div></div>
+      <div class="afield"><label>Imagen de fondo — página de Servicios</label><input id="f-serviciosImg"><div class="img-preview" id="f-serviciosImg-preview"></div></div>
+      <div class="afield"><label>Imagen de fondo — página de Proyectos</label><input id="f-proyectosImg"><div class="img-preview" id="f-proyectosImg-preview"></div></div>
+      <div class="afield"><label>Imagen de fondo — página de Estudio</label><input id="f-estudioImg"><div class="img-preview" id="f-estudioImg-preview"></div></div>
+      <div class="afield"><label>Fotografía dentro de Estudio (la que está centrada, junto al texto)</label><input id="f-estudioPersonImg"><div class="img-preview" id="f-estudioPersonImg-preview"></div></div>
+      <div class="afield"><label>Imagen de fondo — página de Contacto</label><input id="f-contactoImg"><div class="img-preview" id="f-contactoImg-preview"></div></div>
+      <div class="afield"><label>Frase de manifiesto</label><textarea id="f-statement"></textarea></div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 12px">Servicios</p>
+      <div class="afield"><label>Etiqueta superior</label><input id="f-servEyebrow"></div>
+      <div class="afield"><label>Título de sección</label><input id="f-servHeading"></div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 12px">Proyectos</p>
+      <div class="afield"><label>Etiqueta superior</label><input id="f-projEyebrow"></div>
+      <div class="afield"><label>Título de sección</label><input id="f-projHeading"></div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 12px">Estudio</p>
+      <div class="afield"><label>Etiqueta superior</label><input id="f-estudioEyebrow"></div>
+      <div class="afield"><label>Texto del estudio (un párrafo por línea)</label><textarea id="f-estudio" style="min-height:140px"></textarea></div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 12px">Contacto</p>
+      <div class="afield"><label>Etiqueta superior</label><input id="f-contactEyebrow"></div>
+      <div class="afield"><label>Título de sección</label><input id="f-contactHeading"></div>
+      <div class="afield"><label>Correo</label><input id="f-contactEmail"></div>
+      <div class="afield"><label>Teléfono (con lada, solo números para el enlace)</label><input id="f-contactPhone"><small>Ejemplo: 5526995348 — se usará para el enlace de llamada.</small></div>
+      <div class="afield"><label>Teléfono (texto a mostrar)</label><input id="f-contactPhoneDisplay"></div>
+      <div class="afield"><label>Ubicación</label><input id="f-contactLocation"></div>
+      <div class="afield"><label>Mensaje predeterminado de WhatsApp</label><textarea id="f-whatsappMessage"></textarea><small>Este texto aparece ya escrito cuando alguien te contacta desde el botón de WhatsApp.</small></div>
+      <div class="afield"><label>Link de Instagram</label><input id="f-instagramUrl" placeholder="https://instagram.com/tu_usuario"><small>Pega tu link completo. Mientras esté vacío, el botón de Instagram no aparece en el sitio.</small></div>
+      <div class="afield"><label>Link de TikTok</label><input id="f-tiktokUrl" placeholder="https://tiktok.com/@tu_usuario"><small>Pega tu link completo. Mientras esté vacío, el botón de TikTok no aparece en el sitio.</small></div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 12px">Pie de página</p>
+      <div class="afield"><label>Línea de crédito</label><input id="f-footerLine"></div>
+
+      <button class="abtn primary" id="saveTextos">Guardar textos</button>
+    </div>
+
+    <div class="admin-section" id="tab-ingles">
+      <p style="margin-bottom:20px;color:var(--ink-soft);font-size:13px;max-width:56ch">Esta es la versión en inglés del sitio — se muestra cuando alguien da click en el botón "EN". Si dejas un campo vacío, se usa el texto en español mientras tanto.</p>
+
+      <p class="eyebrow" style="display:block;margin-bottom:12px">Inicio</p>
+      <div class="afield"><label>Etiqueta superior (hero)</label><input id="fe-heroEyebrow"></div>
+      <div class="afield"><label>Frase principal (hero)</label><textarea id="fe-heroTitle"></textarea></div>
+      <div class="afield"><label>Línea de servicios</label><input id="fe-heroSub"></div>
+      <div class="afield"><label>Frase de manifiesto</label><textarea id="fe-statement"></textarea></div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 12px">Servicios</p>
+      <div class="afield"><label>Etiqueta superior</label><input id="fe-servEyebrow"></div>
+      <div class="afield"><label>Título de sección</label><input id="fe-servHeading"></div>
+      <div id="servicesEnList"></div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 12px">Proyectos</p>
+      <div class="afield"><label>Etiqueta superior</label><input id="fe-projEyebrow"></div>
+      <div class="afield"><label>Título de sección</label><input id="fe-projHeading"></div>
+      <div id="projectsEnList"></div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 12px">Estudio</p>
+      <div class="afield"><label>Etiqueta superior</label><input id="fe-estudioEyebrow"></div>
+      <div class="afield"><label>Texto del estudio</label><textarea id="fe-estudio" style="min-height:140px"></textarea></div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 12px">Contacto</p>
+      <div class="afield"><label>Etiqueta superior</label><input id="fe-contactEyebrow"></div>
+      <div class="afield"><label>Título de sección</label><input id="fe-contactHeading"></div>
+      <div class="afield"><label>Ubicación</label><input id="fe-contactLocation"></div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 12px">Pie de página</p>
+      <div class="afield"><label>Línea de crédito</label><input id="fe-footerLine"></div>
+
+      <button class="abtn primary" id="saveIngles">Guardar traducción</button>
+    </div>
+
+    <div class="admin-section" id="tab-proyectos">
+      <div id="projectAdminList"></div>
+      <button class="abtn primary" id="addProject">+ Nuevo proyecto</button>
+    </div>
+
+    <div class="admin-section" id="tab-ayuda">
+      <h3 class="serif" style="font-size:20px;margin-bottom:12px">Cómo entrar a este panel</h3>
+      <p style="margin-bottom:24px;color:var(--ink-soft);max-width:60ch">No hay ningún botón visible en el sitio. Para abrir este panel: baja hasta el final de la página y da <strong>5 clics rápidos en cualquier parte de la barra oscura del pie de página</strong> (donde dice el copyright) — no necesitas acertarle a un punto exacto, toda esa franja funciona. Luego escribe la contraseña.<br><br>En computadora también puedes usar el atajo <strong>Ctrl + Shift + R</strong>.<br><br>Guarda este dato en un lugar seguro; es la única forma de entrar.</p>
+
+      <h3 class="serif" style="font-size:20px;margin-bottom:12px">Cómo actualizar el sitio</h3>
+      <p style="margin-bottom:12px;color:var(--ink-soft);max-width:60ch">Los cambios se guardan en el navegador que estás usando ahora mismo. Si editas desde tu laptop, esos cambios se ven en tu laptop; para que se vean igual para todos tus visitantes, usa "Exportar respaldo" abajo y compárteme ese texto — lo dejo fijo en el archivo del sitio.</p>
+      <p style="margin-bottom:12px;color:var(--ink-soft);max-width:60ch"><strong>Imágenes:</strong> sube tus fotos o renders a un servicio de hosting (Google Drive con enlace público, Imgur, Cloudinary, etc.) y pega aquí el enlace directo a la imagen.</p>
+      <p style="margin-bottom:24px;color:var(--ink-soft);max-width:60ch"><strong>Proyectos:</strong> cada proyecto necesita un título, categoría, imagen de portada y descripción. La galería es opcional — pega varias URLs separadas por coma.</p>
+
+      <p class="eyebrow" style="display:block;margin-bottom:10px">Mover textos</p>
+      <div class="afield">
+        <button class="abtn primary" id="startPositionMode" type="button">Activar modo mover textos</button>
+        <small>Cierra este panel y te deja arrastrar cualquier texto del sitio a donde quieras.</small>
+      </div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 10px">Respaldo de contenido</p>
+      <div class="afield">
+        <button class="abtn primary" id="exportBackup" type="button">Exportar respaldo</button>
+        <small>Copia todo tu contenido, colores y posiciones actuales para guardarlo o compartirlo.</small>
+        <textarea id="backupOut" readonly style="min-height:100px;margin-top:10px;font-size:11px;font-family:monospace"></textarea>
+      </div>
+      <div class="afield">
+        <label>Restaurar desde un respaldo</label>
+        <textarea id="backupIn" placeholder="Pega aquí un respaldo exportado anteriormente" style="min-height:100px;font-size:11px;font-family:monospace"></textarea>
+        <button class="abtn" id="importBackup" type="button" style="margin-top:8px">Restaurar este respaldo</button>
+      </div>
+
+      <p class="eyebrow" style="display:block;margin:24px 0 10px">Si algo se ve desactualizado</p>
+      <div class="afield">
+        <button class="abtn danger" id="factoryReset" type="button">Restablecer todo el sitio de fábrica</button>
+        <small>Borra todos los cambios guardados en ESTE navegador (colores, textos, imágenes, posiciones) y vuelve a cargar el sitio con la última versión del archivo. Útil cuando actualizo el archivo y sigues viendo lo anterior. Exporta un respaldo primero si quieres conservar algo.</small>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var DEFAULTS = {
+    heroEyebrow: "Estudio Rosco — Ciudad de México",
+    heroTitle: "Diseñar es decidir con los ojos.",
+    heroSub: "RENDERIZADO · PLANOS · CONCEPTUALIZACIÓN · RECORRIDOS VIRTUALES",
+    heroImg: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop",
+    serviciosImg: "https://images.unsplash.com/photo-1630920384437-53fba5b39dca?q=80&w=1800&auto=format&fit=crop",
+    proyectosImg: "https://images.unsplash.com/photo-1539778100343-71fcce08a31a?q=80&w=1800&auto=format&fit=crop",
+    estudioImg: "https://images.unsplash.com/photo-1503387837-b154d5074bd2?q=80&w=1800&auto=format&fit=crop",
+    estudioPersonImg: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
+    contactoImg: "https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?q=80&w=1800&auto=format&fit=crop",
+    statement: "No diseñamos imágenes para impresionar. Diseñamos herramientas para decidir. Cada render, plano y recorrido te permite experimentar tu proyecto antes de construirlo.\n\nEn la construcción cuesta caro equivocarse. Por eso, primero se ve.",
+    servEyebrow: "Servicios",
+    servHeading: "Pasa. No hay dos casos iguales.",
+    projEyebrow: "Proyectos",
+    projHeading: "Una selección, no un catálogo",
+    estudioEyebrow: "Estudio",
+    estudio: "Estudio Rosco es un estudio de arquitectura y visualización dedicado al desarrollo de proyectos contemporáneos.\n\nEntendemos la representación arquitectónica no como una imagen final, sino como una herramienta para pensar, validar y comunicar el proyecto antes de su materialización.\n\nCada encargo se aborda como un caso de estudio: una selección limitada de proyectos, atención meticulosa al detalle y un enfoque centrado en la claridad, la funcionalidad y la permanencia.",
+    contactEyebrow: "Contacto",
+    contactHeading: "Toda gran arquitectura comienza con una conversación.",
+    contactEmail: "holaroscoestudio@gmail.com",
+    contactPhone: "5526995348",
+    contactPhoneDisplay: "55 2699 5348",
+    contactLocation: "Ciudad de México, México",
+    whatsappMessage: "Hola, me gustaría platicar sobre un proyecto arquitectónico.",
+    instagramUrl: "",
+    tiktokUrl: "",
+    footerLine: "ESTUDIO ROSCO — ARQUITECTURA · DISEÑO · VISUALIZACIÓN",
+    en: {
+      heroEyebrow: "Estudio Rosco — Mexico City",
+      heroTitle: "Design is deciding with your eyes.",
+      heroSub: "RENDERING · FLOOR PLANS · CONCEPT DESIGN · VIRTUAL WALKTHROUGHS",
+      statement: "We don't design images to impress. We design tools to help you decide. Every render, plan and walkthrough lets you experience your project before you build it.\n\nIn construction, mistakes are costly. That's why you see it first.",
+      servEyebrow: "Services",
+      servHeading: "Come in. No two cases are alike.",
+      projEyebrow: "Projects",
+      projHeading: "A selection, not a catalog",
+      estudioEyebrow: "Studio",
+      estudio: "Estudio Rosco is an architecture and visualization studio dedicated to developing contemporary projects.\n\nWe understand architectural representation not as a final image, but as a tool to think through, validate and communicate the project before it's built.\n\nEvery commission is treated as a case study: a limited selection of projects, meticulous attention to detail, and a focus on clarity, function and permanence.",
+      contactEyebrow: "Contact",
+      contactHeading: "Every great building starts with a conversation.",
+      contactLocation: "Mexico City, Mexico",
+      footerLine: "ESTUDIO ROSCO — ARCHITECTURE · DESIGN · VISUALIZATION"
+    },
+    positions: {},
+    design: (function(){
+      var basePage = {
+        bg:"#FAFAF8", bg2:"#EAE8E3",
+        text:"#141311", textSoft:"#5A584F", line:"#D9D6CE",
+        brass:"#141311", brassSoft:"#8C897D",
+        darkBg:"#141311", darkText:"#FAFAF8", darkTextSoft:"#8C897D",
+        fontScale:1
+      };
+      function pg(hover){ var o = Object.assign({}, basePage); if(hover) o.hoverColor = hover; return o; }
+      return {
+        global: { hoverNav:"#6B6E3E", hoverEnabled:true },
+        pages: {
+          inicio: pg(null),
+          servicios: pg("#6B6E3E"),
+          proyectos: pg("#AC9F81"),
+          estudio: pg("#9FAA8A"),
+          contacto: pg("#9FAA8A")
+        }
+      };
+    })(),
+    services: [
+      {title:"Renderizado arquitectónico", desc:"Imágenes fotorrealistas que comunican materialidad, luz y atmósfera antes de la obra.", titleEn:"Architectural rendering", descEn:"Photorealistic images that communicate materiality, light and atmosphere before construction."},
+      {title:"Planos y documentación", desc:"Plantas, cortes y fachadas técnicas, listas para construcción o permisos.", titleEn:"Plans & documentation", descEn:"Floor plans, sections and elevations, ready for construction or permitting."},
+      {title:"Conceptualización", desc:"Del programa arquitectónico a la primera idea espacial, con criterio y referencia.", titleEn:"Concept design", descEn:"From architectural program to the first spatial idea, with judgment and reference."},
+      {title:"Recorridos virtuales", desc:"Experiencias 3D interactivas para caminar el proyecto antes de que exista.", titleEn:"Virtual walkthroughs", descEn:"Interactive 3D experiences to walk through the project before it exists."},
+      {title:"Anteproyecto integral", desc:"Acompañamiento desde el primer boceto hasta el set completo de planos y visualización.", titleEn:"Full pre-project", descEn:"Support from the first sketch through the complete set of drawings and visualization."}
+    ],
+    projects: [
+      {
+        title:"Casa Sayavedra", category:"Residencial · Render", year:"2026",
+        cover:"https://i.imgur.com/yNnMwEY.jpeg",
+        desc:"Ampliación residencial de tres niveles para una vivienda familiar, con bodega de vinos, sala de cata, jardín interior y biblioteca. Desarrollo completo de visualización fotorrealista para acompañar el proceso de obra.",
+        gallery:"https://i.imgur.com/x9uggIY.jpeg,https://i.imgur.com/0au28Lz.jpeg",
+        id:"p1783633629155592",
+        categoryEn:"Residential · Rendering",
+        descEn:"Three-level residential addition for a family home, with a wine cellar, tasting room, interior garden and library. Full photorealistic visualization developed to support the construction process."
+      },
+      {
+        title:"Arrebol Tlalpan", category:"Departamentos · Anteproyecto", year:"2025",
+        cover:"https://i.imgur.com/gpzuTys.jpeg",
+        desc:"Desarrollo de un edificio residencial de mediana densidad, concebido mediante una composición volumétrica sobria y una materialidad cálida que combina piedra natural, madera y elementos metálicos. El proyecto busca generar espacios habitacionales eficientes, luminosos y vinculados visualmente con su contexto.",
+        gallery:"https://i.imgur.com/ikoD9Ir.jpeg,https://i.imgur.com/N5drgjg.jpeg",
+        id:"p1783633629155215",
+        categoryEn:"Apartments · Pre-project",
+        descEn:"Development of a mid-density residential building, conceived through a sober volumetric composition and a warm materiality combining natural stone, wood and metal elements. The project aims to create efficient, light-filled housing spaces visually connected to their context."
+      },
+      {
+        title:"Bosco", category:"Centro Comercial · Conceptualización", year:"2025",
+        cover:"https://i.imgur.com/ocZ76Ef.jpeg",
+        desc:"Conceptualización de un centro comercial contemporáneo compuesto por pabellones modulares y una envolvente de alta transparencia. El proyecto integra arquitectura y paisaje para generar una experiencia comercial abierta, flexible y luminosa, donde el recorrido peatonal y la relación con el entorno se convierten en los principales elementos de diseño.",
+        gallery:"https://i.imgur.com/H663oPG.jpeg,https://i.imgur.com/SXB3qkT.jpeg",
+        id:"p1783633629155381",
+        categoryEn:"Shopping Center · Concept Design",
+        descEn:"Concept design for a contemporary shopping center made up of modular pavilions and a highly transparent envelope. The project integrates architecture and landscape to create an open, flexible, light-filled retail experience, where the pedestrian route and the relationship with the surroundings become the main design elements."
+      }
+    ]
+  };
+
+  var state = null;
+  var currentLang = sessionStorage.getItem('rosco-lang') || 'es';
+
+  function uid(){ return 'p' + Date.now() + Math.floor(Math.random()*999); }
+
+  // Storage adapter: uses Claude's window.storage when available (in-app preview),
+  // and falls back to the browser's localStorage once the file is hosted on its own domain.
+  async function storageGet(key){
+    try{
+      if(window.storage && typeof window.storage.get === 'function'){
+        var r = await window.storage.get(key, false);
+        if(r && r.value) return r.value;
+      }
+    }catch(e){}
+    try{
+      var v = localStorage.getItem('rosco:'+key);
+      return v===null ? null : v;
+    }catch(e){ return null; }
+  }
+  async function storageSet(key, value){
+    var ok = false;
+    try{
+      if(window.storage && typeof window.storage.set === 'function'){
+        var r = await window.storage.set(key, value, false);
+        if(r) ok = true;
+      }
+    }catch(e){}
+    try{ localStorage.setItem('rosco:'+key, value); ok = true; }catch(e){}
+    return ok;
+  }
+
+  var PAGE_KEYS = ['inicio','servicios','proyectos','estudio','contacto'];
+
+  function migrateDesign(saved){
+    saved = saved || {};
+    // Formato viejo: un solo objeto de colores compartido por todo el sitio.
+    if(!saved.pages){
+      var old = saved;
+      var pages = {};
+      PAGE_KEYS.forEach(function(page){
+        var d = Object.assign({}, DEFAULTS.design.pages[page]);
+        ['bg','bg2','text','textSoft','line','brass','brassSoft','darkBg','darkText','darkTextSoft','fontScale'].forEach(function(k){
+          if(old[k] !== undefined) d[k] = old[k];
+        });
+        pages[page] = d;
+      });
+      if(old.hoverServicios !== undefined) pages.servicios.hoverColor = old.hoverServicios;
+      if(old.hoverProyectos !== undefined) pages.proyectos.hoverColor = old.hoverProyectos;
+      if(old.hoverEstudio !== undefined) pages.estudio.hoverColor = old.hoverEstudio;
+      if(old.hoverContacto !== undefined) pages.contacto.hoverColor = old.hoverContacto;
+      return {
+        global: {
+          hoverNav: old.hoverNav !== undefined ? old.hoverNav : DEFAULTS.design.global.hoverNav,
+          hoverEnabled: old.hoverEnabled !== undefined ? old.hoverEnabled : DEFAULTS.design.global.hoverEnabled
+        },
+        pages: pages
+      };
+    }
+    // Formato nuevo ya existente: solo completar campos faltantes con los defaults.
+    var result = { global: Object.assign({}, DEFAULTS.design.global, saved.global||{}), pages: {} };
+    PAGE_KEYS.forEach(function(page){
+      result.pages[page] = Object.assign({}, DEFAULTS.design.pages[page], (saved.pages||{})[page]||{});
+    });
+    return result;
+  }
+
+  async function loadState(){
+    try{
+      var v = await storageGet('site-content');
+      state = v ? JSON.parse(v) : JSON.parse(JSON.stringify(DEFAULTS));
+    }catch(e){
+      state = JSON.parse(JSON.stringify(DEFAULTS));
+    }
+    state.projects.forEach(function(p){ if(!p.id) p.id = uid(); });
+    state.design = migrateDesign(state.design);
+    state.positions = Object.assign({}, state.positions||{});
+    state.en = Object.assign({}, DEFAULTS.en, state.en||{});
+    if(state.instagramUrl === undefined) state.instagramUrl = '';
+    if(state.tiktokUrl === undefined) state.tiktokUrl = '';
+    if(state.estudioPersonImg === undefined) state.estudioPersonImg = DEFAULTS.estudioPersonImg;
+    applyDesign();
+    render();
+    applyUIStrings();
+  }
+
+  // ---------- TRANSLATION ----------
+  var UI_STRINGS = {
+    es: {
+      navServicios:"Servicios", navProyectos:"Proyectos", navEstudio:"Estudio", navContacto:"Contacto",
+      labelCorreo:"Correo", labelTelefono:"Teléfono", labelUbicacion:"Ubicación",
+      waCta:"Escríbeme directo", igCta:"Síguenos", ttCta:"Síguenos",
+      formNombre:"Nombre", formCorreo:"Correo", formMensaje:"Cuéntame del proyecto",
+      placeholderNombre:"Tu nombre", placeholderCorreo:"tu@correo.com", placeholderMensaje:"Tipo de proyecto, ubicación, etapa actual…",
+      btnEnviar:"Enviar mensaje"
+    },
+    en: {
+      navServicios:"Services", navProyectos:"Projects", navEstudio:"Studio", navContacto:"Contact",
+      labelCorreo:"Email", labelTelefono:"Phone", labelUbicacion:"Location",
+      waCta:"Message me directly", igCta:"Follow us", ttCta:"Follow us",
+      formNombre:"Name", formCorreo:"Email", formMensaje:"Tell me about the project",
+      placeholderNombre:"Your name", placeholderCorreo:"you@email.com", placeholderMensaje:"Project type, location, current stage…",
+      btnEnviar:"Send message"
+    }
+  };
+
+  function t(key){
+    if(currentLang === 'en' && state.en && state.en[key]){ return state.en[key]; }
+    return state[key];
+  }
+
+  function applyUIStrings(){
+    var dict = UI_STRINGS[currentLang] || UI_STRINGS.es;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-placeholder');
+      if(dict[key] !== undefined) el.placeholder = dict[key];
+    });
+    document.documentElement.lang = currentLang === 'en' ? 'en' : 'es-MX';
+    var toggle = document.getElementById('langToggle');
+    if(toggle) toggle.textContent = currentLang === 'en' ? 'ES' : 'EN';
+  }
+
+  var HOVER_VAR_BY_PAGE = { servicios:'--hover-servicios', proyectos:'--hover-proyectos', estudio:'--hover-estudio', contacto:'--hover-contacto' };
+
+  function applyDesignForPage(page, target){
+    var d = state.design.pages[page];
+    if(!d || !target) return;
+    var s = target.style;
+    s.setProperty('--cream', d.bg);
+    s.setProperty('--cream-2', d.bg2);
+    s.setProperty('--ink', d.text);
+    s.setProperty('--ink-soft', d.textSoft);
+    s.setProperty('--line', d.line);
+    s.setProperty('--brass', d.brass);
+    s.setProperty('--brass-soft', d.brassSoft);
+    s.setProperty('--dark-bg', d.darkBg);
+    s.setProperty('--dark-text', d.darkText);
+    s.setProperty('--dark-text-soft', d.darkTextSoft);
+    s.setProperty('--font-scale', d.fontScale);
+    if(HOVER_VAR_BY_PAGE[page]) s.setProperty(HOVER_VAR_BY_PAGE[page], d.hoverColor);
+  }
+
+  function applyDesign(){
+    var g = state.design.global;
+    var root = document.documentElement.style;
+    root.setProperty('--hover-nav', g.hoverNav);
+    document.body.classList.toggle('hover-tint-off', !g.hoverEnabled);
+
+    // El header/nav y el pie de página viven fuera de cualquier .page,
+    // así que la raíz refleja Inicio (claro) y Contacto (oscuro) como respaldo.
+    applyDesignForPage('inicio', document.documentElement);
+    var c = state.design.pages.contacto;
+    root.setProperty('--dark-bg', c.darkBg);
+    root.setProperty('--dark-text', c.darkText);
+    root.setProperty('--dark-text-soft', c.darkTextSoft);
+
+    PAGE_KEYS.forEach(function(page){
+      applyDesignForPage(page, document.getElementById('page-'+page));
+    });
+  }
+
+  async function saveState(msg){
+    var ok = await storageSet('site-content', JSON.stringify(state));
+    toast(ok ? (msg || 'Guardado') : 'No se pudo guardar. Intenta de nuevo.');
+  }
+
+  function toast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._tm);
+    t._tm = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+
+  function esc(s){
+    return (s||'').replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; });
+  }
+
+  function waHref(){
+    var digits = (state.contactPhone||'').replace(/\D/g,'');
+    var msg = encodeURIComponent(state.whatsappMessage || '');
+    return 'https://wa.me/52'+digits+(msg?('?text='+msg):'');
+  }
+
+  function render(){
+    document.getElementById('heroEyebrow').textContent = t('heroEyebrow');
+    document.getElementById('heroTitle').textContent = t('heroTitle');
+    document.getElementById('heroSub').textContent = t('heroSub');
+    document.getElementById('heroImg').src = state.heroImg;
+    document.getElementById('serviciosImg').src = state.serviciosImg;
+    document.getElementById('proyectosImg').src = state.proyectosImg;
+    document.getElementById('estudioImg').src = state.estudioImg;
+    document.getElementById('estudioPersonImg').src = state.estudioPersonImg;
+    document.getElementById('contactoImg').src = state.contactoImg;
+    document.getElementById('statementText').innerHTML = esc(t('statement')).replace(/(Ayudamos a decidir\.|help you decide\.)/,'<span class="accent">$1</span>');
+
+    document.getElementById('servEyebrow').textContent = t('servEyebrow');
+    document.getElementById('servHeading').textContent = t('servHeading');
+    document.getElementById('projEyebrow').textContent = t('projEyebrow');
+    document.getElementById('projHeading').textContent = t('projHeading');
+    document.getElementById('estudioEyebrow').textContent = t('estudioEyebrow');
+    document.getElementById('estudioText').innerHTML = t('estudio').split('\n').filter(Boolean).map(function(p){return '<p>'+esc(p)+'</p>';}).join('');
+
+    document.getElementById('contactEyebrow').textContent = t('contactEyebrow');
+    document.getElementById('contactHeading').textContent = t('contactHeading');
+    var emailLink = document.getElementById('contactEmailLink');
+    emailLink.textContent = state.contactEmail;
+    emailLink.href = 'mailto:'+state.contactEmail;
+    var phoneLink = document.getElementById('contactPhoneLink');
+    phoneLink.textContent = state.contactPhoneDisplay;
+    phoneLink.href = 'tel:+52'+state.contactPhone.replace(/\D/g,'');
+    var waUrl = waHref();
+    document.getElementById('contactWhatsappLink').href = waUrl;
+    document.getElementById('waFloat').href = waUrl;
+
+    var igLink = document.getElementById('contactInstagramLink');
+    var igFloat = document.getElementById('igFloat');
+    var igLabel = document.getElementById('igLabel');
+    if(state.instagramUrl){
+      igLink.href = state.instagramUrl; igLink.style.display = ''; igLabel.style.display = '';
+      igFloat.href = state.instagramUrl; igFloat.style.display = 'flex';
+    } else {
+      igLink.style.display = 'none'; igLabel.style.display = 'none'; igFloat.style.display = 'none';
+    }
+    var ttLink = document.getElementById('contactTiktokLink');
+    var ttFloat = document.getElementById('ttFloat');
+    var ttLabel = document.getElementById('ttLabel');
+    if(state.tiktokUrl){
+      ttLink.href = state.tiktokUrl; ttLink.style.display = ''; ttLabel.style.display = '';
+      ttFloat.href = state.tiktokUrl; ttFloat.style.display = 'flex';
+    } else {
+      ttLink.style.display = 'none'; ttLabel.style.display = 'none'; ttFloat.style.display = 'none';
+    }
+    document.getElementById('contactLocation').textContent = t('contactLocation');
+    document.getElementById('footerLine').textContent = t('footerLine');
+
+    var sl = document.getElementById('serviceList');
+    sl.innerHTML = state.services.map(function(s,i){
+      var title = (currentLang==='en' && s.titleEn) ? s.titleEn : s.title;
+      var desc = (currentLang==='en' && s.descEn) ? s.descEn : s.desc;
+      return '<div class="service-row reveal"><span class="service-num">0'+(i+1)+'</span><h3>'+esc(title)+'</h3><p>'+esc(desc)+'</p></div>';
+    }).join('');
+
+    var pg = document.getElementById('projectGrid');
+    pg.innerHTML = state.projects.map(function(p){
+      var cat = (currentLang==='en' && p.categoryEn) ? p.categoryEn : p.category;
+      return '<button class="project-card reveal" data-id="'+p.id+'" aria-label="Ver caso de estudio: '+esc(p.title)+'">'+
+        '<div class="project-thumb"><img src="'+esc(p.cover)+'" alt="'+esc(p.title)+' — '+esc(cat)+'" loading="lazy">'+
+        '<svg class="mark"><use href="#mark-svg"/></svg></div>'+
+        '<div class="project-meta"><h3>'+esc(p.title)+'</h3><span>'+esc(cat)+'</span></div>'+
+      '</button>';
+    }).join('');
+
+    document.querySelectorAll('.project-card').forEach(function(btn){
+      btn.addEventListener('click', function(){ openLightbox(btn.getAttribute('data-id')); });
+    });
+
+    observeReveal();
+    renderAdminProjects();
+    setupDraggables();
+    applyPositions();
+  }
+
+  var DRAG_KEYS = ['heroEyebrow','heroTitle','heroSub','statementText','servEyebrow','servHeading','projEyebrow','projHeading','estudioEyebrow','estudioText','contactEyebrow','contactHeading','contactEmailLink','contactPhoneLink','contactWhatsappLink','contactLocation','footerLine'];
+  var selectedKey = null;
+  var posToolbar = document.getElementById('posToolbar');
+  var posFontLabel = document.getElementById('posFontLabel');
+  var posJustifyBtn = document.getElementById('posJustifyBtn');
+  var posResizeHandle = document.getElementById('posResizeHandle');
+
+  function getPos(key){
+    if(!state.positions[key]) state.positions[key] = {x:0,y:0};
+    var p = state.positions[key];
+    if(p.x===undefined) p.x = 0;
+    if(p.y===undefined) p.y = 0;
+    return p;
+  }
+
+  function applyElementStyle(key){
+    var el = document.getElementById(key);
+    if(!el) return;
+    var p = state.positions[key];
+    if(!p){ el.style.transform=''; el.style.width=''; el.style.maxWidth=''; el.style.fontSize=''; el.style.textAlign=''; return; }
+    el.style.transform = (p.x || p.y) ? 'translate('+p.x+'px,'+p.y+'px)' : '';
+    if(p.w){ el.style.width = p.w+'px'; el.style.maxWidth = p.w+'px'; }
+    else { el.style.width=''; el.style.maxWidth=''; }
+    el.style.fontSize = '';
+    if(p.scale && p.scale !== 1){
+      var natural = parseFloat(window.getComputedStyle(el).fontSize) || 16;
+      el.style.fontSize = (natural * p.scale) + 'px';
+    }
+    el.style.textAlign = p.justify ? 'justify' : '';
+  }
+
+  function updateToolbarPosition(){
+    if(!selectedKey) return;
+    var el = document.getElementById(selectedKey);
+    if(!el) return;
+    var r = el.getBoundingClientRect();
+    var tw = posToolbar.offsetWidth || 220;
+    posToolbar.style.left = Math.max(8, Math.min(window.innerWidth - tw - 8, r.left)) + 'px';
+    posToolbar.style.top = Math.max(8, r.top - 46) + 'px';
+    posResizeHandle.style.left = (r.right - 7) + 'px';
+    posResizeHandle.style.top = (r.bottom - 7) + 'px';
+  }
+
+  function selectElement(key){
+    if(selectedKey && selectedKey !== key){
+      var prevEl = document.getElementById(selectedKey);
+      if(prevEl) prevEl.classList.remove('pos-selected');
+    }
+    selectedKey = key;
+    var el = document.getElementById(key);
+    if(!el) return;
+    el.classList.add('pos-selected');
+    var p = getPos(key);
+    posFontLabel.textContent = Math.round((p.scale||1)*100)+'%';
+    posJustifyBtn.classList.toggle('active', !!p.justify);
+    posToolbar.classList.add('show');
+    posResizeHandle.classList.add('show');
+    updateToolbarPosition();
+  }
+
+  function deselectElement(){
+    if(selectedKey){
+      var el = document.getElementById(selectedKey);
+      if(el) el.classList.remove('pos-selected');
+    }
+    selectedKey = null;
+    posToolbar.classList.remove('show');
+    posResizeHandle.classList.remove('show');
+  }
+
+  function setupDraggables(){
+    DRAG_KEYS.forEach(function(key){
+      var el = document.getElementById(key);
+      if(!el || el.hasAttribute('data-draggable')) return;
+      el.setAttribute('data-draggable','');
+      var startX, startY, origX, origY, dragged;
+
+      el.addEventListener('pointerdown', function(e){
+        if(!document.body.classList.contains('position-mode')) return;
+        e.preventDefault();
+        dragged = false;
+        el.setPointerCapture(e.pointerId);
+        startX = e.clientX; startY = e.clientY;
+        var pos = getPos(key);
+        origX = pos.x; origY = pos.y;
+        el.classList.add('dragging');
+        selectElement(key);
+      });
+      el.addEventListener('pointermove', function(e){
+        if(!document.body.classList.contains('position-mode') || startX===undefined || !el.classList.contains('dragging')) return;
+        var dx = e.clientX - startX, dy = e.clientY - startY;
+        if(Math.abs(dx)>2 || Math.abs(dy)>2) dragged = true;
+        el.style.transform = 'translate('+(origX+dx)+'px,'+(origY+dy)+'px)';
+        updateToolbarPosition();
+      });
+      el.addEventListener('pointerup', function(e){
+        if(!el.classList.contains('dragging')) return;
+        el.classList.remove('dragging');
+        var dx = e.clientX - startX, dy = e.clientY - startY;
+        var p = getPos(key);
+        p.x = origX+dx; p.y = origY+dy;
+        startX = undefined;
+        updateToolbarPosition();
+        if(dragged) saveState('Posición guardada');
+      });
+      el.addEventListener('click', function(e){
+        if(document.body.classList.contains('position-mode')){
+          if(dragged){ e.preventDefault(); }
+          selectElement(key);
+        }
+      });
+    });
+  }
+
+  function applyPositions(){
+    DRAG_KEYS.forEach(function(key){ applyElementStyle(key); });
+  }
+
+  // ---------- Barra flotante: tamaño, ancho y justificado ----------
+  document.getElementById('posFontMinus').addEventListener('click', function(){
+    if(!selectedKey) return;
+    var p = getPos(selectedKey);
+    p.scale = Math.max(0.5, +(((p.scale||1) - 0.1).toFixed(2)));
+    applyElementStyle(selectedKey);
+    posFontLabel.textContent = Math.round(p.scale*100)+'%';
+    updateToolbarPosition();
+    saveState('Tamaño de letra actualizado');
+  });
+  document.getElementById('posFontPlus').addEventListener('click', function(){
+    if(!selectedKey) return;
+    var p = getPos(selectedKey);
+    p.scale = Math.min(3, +(((p.scale||1) + 0.1).toFixed(2)));
+    applyElementStyle(selectedKey);
+    posFontLabel.textContent = Math.round(p.scale*100)+'%';
+    updateToolbarPosition();
+    saveState('Tamaño de letra actualizado');
+  });
+  posJustifyBtn.addEventListener('click', function(){
+    if(!selectedKey) return;
+    var p = getPos(selectedKey);
+    p.justify = !p.justify;
+    applyElementStyle(selectedKey);
+    posJustifyBtn.classList.toggle('active', p.justify);
+    saveState('Alineación actualizada');
+  });
+  document.getElementById('posClearBtn').addEventListener('click', function(){
+    if(!selectedKey) return;
+    var p = getPos(selectedKey);
+    delete p.w; delete p.scale; delete p.justify;
+    applyElementStyle(selectedKey);
+    posFontLabel.textContent = '100%';
+    posJustifyBtn.classList.remove('active');
+    updateToolbarPosition();
+    saveState('Texto restablecido');
+  });
+
+  (function setupResizeHandle(){
+    var active = false, startX, startWidth;
+    posResizeHandle.addEventListener('pointerdown', function(e){
+      if(!selectedKey) return;
+      e.preventDefault(); e.stopPropagation();
+      active = true;
+      posResizeHandle.setPointerCapture(e.pointerId);
+      startX = e.clientX;
+      var el = document.getElementById(selectedKey);
+      var p = getPos(selectedKey);
+      startWidth = p.w || el.getBoundingClientRect().width;
+    });
+    posResizeHandle.addEventListener('pointermove', function(e){
+      if(!active || !selectedKey) return;
+      var dx = e.clientX - startX;
+      var p = getPos(selectedKey);
+      p.w = Math.max(90, Math.round(startWidth + dx));
+      applyElementStyle(selectedKey);
+      updateToolbarPosition();
+    });
+    posResizeHandle.addEventListener('pointerup', function(){
+      if(!active) return;
+      active = false;
+      saveState('Ancho del texto actualizado');
+    });
+  })();
+
+  document.addEventListener('pointerdown', function(e){
+    if(!document.body.classList.contains('position-mode')) return;
+    if(e.target.closest('[data-draggable]') || e.target.closest('#posToolbar') || e.target === posResizeHandle) return;
+    deselectElement();
+  });
+  window.addEventListener('resize', function(){ if(selectedKey) updateToolbarPosition(); });
+
+
+  function openLightbox(id){
+    var p = state.projects.find(function(x){ return x.id===id; });
+    if(!p) return;
+    var gal = (p.gallery||'').split(',').map(function(s){return s.trim();}).filter(Boolean);
+    var cat = (currentLang==='en' && p.categoryEn) ? p.categoryEn : p.category;
+    var desc = (currentLang==='en' && p.descEn) ? p.descEn : p.desc;
+    var html = '<div class="lb-cover" data-idx="0"><img src="'+esc(p.cover)+'" alt="'+esc(p.title)+'"></div>'+
+      '<span class="eyebrow">'+esc(cat)+' · '+esc(p.year||'')+'</span>'+
+      '<h2>'+esc(p.title)+'</h2><p>'+esc(desc)+'</p>';
+    if(gal.length){
+      html += '<div class="lb-gallery">'+gal.map(function(g,i){return '<img src="'+esc(g)+'" alt="'+esc(p.title)+' — detalle" loading="lazy" data-idx="'+(i+1)+'">';}).join('')+'</div>';
+    }
+    document.getElementById('lbContent').innerHTML = html;
+    var lb = document.getElementById('lightbox');
+    lb.classList.add('open');
+    document.getElementById('lbClose').focus();
+    document.body.style.overflow='hidden';
+
+    var galleryImages = [p.cover].concat(gal);
+    document.querySelector('.lb-cover').addEventListener('click', function(){ openImageViewer(galleryImages, 0); });
+    document.querySelectorAll('.lb-gallery img').forEach(function(img, i){
+      img.addEventListener('click', function(){ openImageViewer(galleryImages, i+1); });
+    });
+  }
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox').addEventListener('click', function(e){ if(e.target.id==='lightbox') closeLightbox(); });
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  // ---------- IMAGE VIEWER ----------
+  var ivImages = [], ivIndex = 0;
+  var imgViewer = document.getElementById('imgViewer');
+  function openImageViewer(images, index){
+    ivImages = images; ivIndex = index;
+    updateImageViewer();
+    imgViewer.classList.add('open');
+    document.getElementById('ivClose').focus();
+  }
+  function updateImageViewer(){
+    document.getElementById('ivImg').src = ivImages[ivIndex];
+    var showNav = ivImages.length > 1;
+    document.getElementById('ivPrev').style.display = showNav ? 'flex' : 'none';
+    document.getElementById('ivNext').style.display = showNav ? 'flex' : 'none';
+  }
+  function closeImageViewer(){ imgViewer.classList.remove('open'); }
+  document.getElementById('ivClose').addEventListener('click', closeImageViewer);
+  document.getElementById('ivPrev').addEventListener('click', function(){ ivIndex = (ivIndex - 1 + ivImages.length) % ivImages.length; updateImageViewer(); });
+  document.getElementById('ivNext').addEventListener('click', function(){ ivIndex = (ivIndex + 1) % ivImages.length; updateImageViewer(); });
+  imgViewer.addEventListener('click', function(e){ if(e.target.id==='imgViewer') closeImageViewer(); });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape'){ closeImageViewer(); closeLightbox(); closeAdmin(); closeMenu(); }
+    if(imgViewer.classList.contains('open')){
+      if(e.key==='ArrowRight') document.getElementById('ivNext').click();
+      if(e.key==='ArrowLeft') document.getElementById('ivPrev').click();
+    }
+  });
+
+  function observeReveal(){
+    var els = document.querySelectorAll('.reveal:not(.in)');
+    if(!('IntersectionObserver' in window)){ els.forEach(function(e){ e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:.15});
+    els.forEach(function(e){ io.observe(e); });
+  }
+
+  // mobile menu
+  var menuBtn = document.getElementById('menuBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', function(){
+    var open = mobileMenu.classList.toggle('open');
+    menuBtn.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  function closeMenu(){
+    mobileMenu.classList.remove('open'); menuBtn.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded','false'); document.body.style.overflow='';
+  }
+  document.querySelectorAll('[data-close]').forEach(function(a){ a.addEventListener('click', closeMenu); });
+
+  // ---------- PAGE NAVIGATION ----------
+  var PAGE_IDS = ['inicio','servicios','proyectos','estudio','contacto'];
+  var currentPage = 'inicio';
+
+  function goToPage(id, skipHistory){
+    if(PAGE_IDS.indexOf(id) === -1 || id === currentPage) return;
+    var current = document.getElementById('page-'+currentPage);
+    var next = document.getElementById('page-'+id);
+    if(!next) return;
+    if(current){
+      current.classList.remove('visible');
+      setTimeout(function(){ current.classList.remove('active'); }, 700);
+    }
+    next.classList.add('active');
+    void next.offsetWidth; // force reflow so the fade-in transition runs
+    observeReveal(); // re-scan now that this page has real layout
+    requestAnimationFrame(function(){ next.classList.add('visible'); });
+    next.scrollTop = 0;
+    window.scrollTo(0,0);
+    currentPage = id;
+    if(!skipHistory){ history.pushState({page:id}, '', '#'+id); }
+  }
+
+  function idFromHref(href){
+    var m = (href||'').match(/#(\w+)/);
+    return m ? m[1] : null;
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var id = idFromHref(a.getAttribute('href'));
+    if(id === 'main'){
+      a.addEventListener('click', function(e){ e.preventDefault(); goToPage('inicio'); });
+    } else if(PAGE_IDS.indexOf(id) !== -1){
+      a.addEventListener('click', function(e){ e.preventDefault(); goToPage(id); });
+    }
+  });
+
+  window.addEventListener('popstate', function(e){
+    var id = (e.state && e.state.page) || idFromHref(location.hash) || 'inicio';
+    goToPage(id, true);
+  });
+
+  (function(){
+    var initial = idFromHref(location.hash);
+    if(initial && PAGE_IDS.indexOf(initial) !== -1 && initial !== 'inicio'){
+      currentPage = 'inicio';
+      goToPage(initial, true);
+    }
+  })();
+
+  // hero load + mark draw
+  window.addEventListener('load', function(){
+    document.getElementById('hero').classList.add('loaded');
+    document.querySelectorAll('.brand-lockup .mark').forEach(function(m){ m.classList.add('draw'); });
+  });
+
+  // ---------- INTRO SPLASH ----------
+  (function(){
+    var splash = document.getElementById('introSplash');
+    if(!splash || splash.style.display === 'none') return;
+    function dismiss(){
+      if(splash.classList.contains('hide')) return;
+      splash.classList.add('hide');
+      sessionStorage.setItem('rosco-intro-seen', '1');
+      setTimeout(function(){ splash.style.display = 'none'; }, 850);
+    }
+    splash.addEventListener('click', dismiss);
+    setTimeout(dismiss, 2100);
+  })();
+
+  // contact form
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('cf-name').value.trim();
+    var email = document.getElementById('cf-email').value.trim();
+    var msg = document.getElementById('cf-msg').value.trim();
+    var body = encodeURIComponent('Nombre: '+name+'\nCorreo: '+email+'\n\n'+msg);
+    window.location.href = 'mailto:'+state.contactEmail+'?subject=Nuevo%20proyecto%20desde%20el%20sitio&body='+body;
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------- LANGUAGE TOGGLE ----------
+  document.getElementById('langToggle').addEventListener('click', function(){
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    sessionStorage.setItem('rosco-lang', currentLang);
+    applyUIStrings();
+    render();
+  });
+
+  // ---------- ADMIN ACCESS GATE ----------
+  var ADMIN_PASSWORD = "rosco2026"; // pídeme cambiarla cuando quieras
+  function checkAdminAccess(callback){
+    if(sessionStorage.getItem('rosco-admin-unlocked') === '1'){ callback(); return; }
+    var pass = prompt('Contraseña de administrador:');
+    if(pass === null) return;
+    if(pass === ADMIN_PASSWORD){
+      sessionStorage.setItem('rosco-admin-unlocked', '1');
+      callback();
+    } else {
+      toast('Contraseña incorrecta');
+    }
+  }
+
+  // ---------- SECRET ACCESS (5 clicks anywhere on the footer bar) ----------
+  var secretClicks = 0, secretClicksTimer = null;
+  document.getElementById('secretTrigger').addEventListener('click', function(){
+    secretClicks++;
+    clearTimeout(secretClicksTimer);
+    secretClicksTimer = setTimeout(function(){ secretClicks = 0; }, 2000);
+    if(secretClicks >= 5){
+      secretClicks = 0;
+      checkAdminAccess(openAdmin);
+    }
+  });
+  // Keyboard fallback for desktop: Ctrl+Shift+R
+  document.addEventListener('keydown', function(e){
+    if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'r'){
+      e.preventDefault();
+      checkAdminAccess(openAdmin);
+    }
+  });
+
+  // ---------- POSITION MODE ----------
+  var posBar = document.getElementById('posBar');
+  document.getElementById('startPositionMode').addEventListener('click', function(){
+    closeAdmin();
+    document.body.classList.add('position-mode');
+    posBar.classList.add('show');
+  });
+  document.getElementById('exitPositionMode').addEventListener('click', function(){
+    document.body.classList.remove('position-mode');
+    posBar.classList.remove('show');
+    deselectElement();
+  });
+  document.getElementById('resetPositions').addEventListener('click', function(){
+    if(!confirm('¿Restablecer todos los textos a su posición, tamaño y ancho original?')) return;
+    state.positions = {};
+    deselectElement();
+    applyPositions();
+    saveState('Posiciones restablecidas');
+  });
+
+  // ---------- BACKUP EXPORT / IMPORT ----------
+  document.getElementById('exportBackup').addEventListener('click', function(){
+    var json = JSON.stringify(state, null, 2);
+    var out = document.getElementById('backupOut');
+    out.value = json;
+    out.select();
+    try{
+      navigator.clipboard.writeText(json);
+      toast('Respaldo copiado al portapapeles');
+    }catch(e){
+      toast('Respaldo generado — cópialo manualmente');
+    }
+  });
+  document.getElementById('importBackup').addEventListener('click', function(){
+    var raw = document.getElementById('backupIn').value.trim();
+    if(!raw){ toast('Pega un respaldo primero'); return; }
+    try{
+      var parsed = JSON.parse(raw);
+      state = parsed;
+      state.projects = state.projects || [];
+      state.projects.forEach(function(p){ if(!p.id) p.id = uid(); });
+      state.design = migrateDesign(state.design);
+      state.positions = Object.assign({}, state.positions||{});
+      applyDesign();
+      render();
+      saveState('Respaldo restaurado');
+    }catch(e){
+      toast('Ese respaldo no es válido');
+    }
+  });
+
+  document.getElementById('factoryReset').addEventListener('click', async function(){
+    if(!confirm('Esto borra TODOS los cambios guardados en este navegador (colores, textos, imágenes, posiciones) y recarga el sitio con la última versión del archivo. ¿Exportaste un respaldo si querías conservar algo? Esta acción no se puede deshacer.')) return;
+    try{
+      if(window.storage && typeof window.storage.delete === 'function'){
+        await window.storage.delete('site-content', false);
+      }
+    }catch(e){}
+    try{ localStorage.removeItem('rosco:site-content'); }catch(e){}
+    location.reload();
+  });
+
+  // ---------- ADMIN ----------
+  var adminPanel = document.getElementById('adminPanel');
+  var IMG_PREVIEW_KEYS = ['heroImg','serviciosImg','proyectosImg','estudioImg','estudioPersonImg','contactoImg'];
+  function updateImgPreview(key){
+    var url = document.getElementById('f-'+key).value.trim();
+    var box = document.getElementById('f-'+key+'-preview');
+    if(!box) return;
+    if(!url){ box.innerHTML = ''; return; }
+    box.innerHTML = '';
+    var img = new Image();
+    img.alt = '';
+    img.onload = function(){ box.innerHTML = ''; box.appendChild(img); };
+    img.onerror = function(){ box.innerHTML = '<div class="img-error">No se pudo cargar esta imagen — revisa que el link termine en .jpg/.png/.webp y sea un enlace directo (no la página donde la viste).</div>'; };
+    img.src = url;
+  }
+  IMG_PREVIEW_KEYS.forEach(function(key){
+    var input = document.getElementById('f-'+key);
+    if(input) input.addEventListener('input', function(){ updateImgPreview(key); });
+  });
+
+  document.getElementById('adminClose').addEventListener('click', closeAdmin);
+  function openAdmin(){
+    document.getElementById('f-heroEyebrow').value = state.heroEyebrow;
+    document.getElementById('f-heroTitle').value = state.heroTitle;
+    document.getElementById('f-heroSub').value = state.heroSub;
+    document.getElementById('f-heroImg').value = state.heroImg;
+    document.getElementById('f-serviciosImg').value = state.serviciosImg;
+    document.getElementById('f-proyectosImg').value = state.proyectosImg;
+    document.getElementById('f-estudioImg').value = state.estudioImg;
+    document.getElementById('f-estudioPersonImg').value = state.estudioPersonImg;
+    document.getElementById('f-contactoImg').value = state.contactoImg;
+    IMG_PREVIEW_KEYS.forEach(updateImgPreview);
+    document.getElementById('f-statement').value = state.statement;
+    document.getElementById('f-servEyebrow').value = state.servEyebrow;
+    document.getElementById('f-servHeading').value = state.servHeading;
+    document.getElementById('f-projEyebrow').value = state.projEyebrow;
+    document.getElementById('f-projHeading').value = state.projHeading;
+    document.getElementById('f-estudioEyebrow').value = state.estudioEyebrow;
+    document.getElementById('f-estudio').value = state.estudio;
+    document.getElementById('f-contactEyebrow').value = state.contactEyebrow;
+    document.getElementById('f-contactHeading').value = state.contactHeading;
+    document.getElementById('f-contactEmail').value = state.contactEmail;
+    document.getElementById('f-contactPhone').value = state.contactPhone;
+    document.getElementById('f-contactPhoneDisplay').value = state.contactPhoneDisplay;
+    document.getElementById('f-contactLocation').value = state.contactLocation;
+    document.getElementById('f-whatsappMessage').value = state.whatsappMessage;
+    document.getElementById('f-instagramUrl').value = state.instagramUrl;
+    document.getElementById('f-tiktokUrl').value = state.tiktokUrl;
+    document.getElementById('f-footerLine').value = state.footerLine;
+    fillDesignInputs();
+    applyDesignForPage(currentDesignPage, document.getElementById('designPreview'));
+    fillInglesTab();
+    adminPanel.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeAdmin(){ adminPanel.classList.remove('open'); document.body.style.overflow=''; }
+
+  function fillInglesTab(){
+    var en = state.en;
+    document.getElementById('fe-heroEyebrow').value = en.heroEyebrow || '';
+    document.getElementById('fe-heroTitle').value = en.heroTitle || '';
+    document.getElementById('fe-heroSub').value = en.heroSub || '';
+    document.getElementById('fe-statement').value = en.statement || '';
+    document.getElementById('fe-servEyebrow').value = en.servEyebrow || '';
+    document.getElementById('fe-servHeading').value = en.servHeading || '';
+    document.getElementById('fe-projEyebrow').value = en.projEyebrow || '';
+    document.getElementById('fe-projHeading').value = en.projHeading || '';
+    document.getElementById('fe-estudioEyebrow').value = en.estudioEyebrow || '';
+    document.getElementById('fe-estudio').value = en.estudio || '';
+    document.getElementById('fe-contactEyebrow').value = en.contactEyebrow || '';
+    document.getElementById('fe-contactHeading').value = en.contactHeading || '';
+    document.getElementById('fe-contactLocation').value = en.contactLocation || '';
+    document.getElementById('fe-footerLine').value = en.footerLine || '';
+
+    document.getElementById('servicesEnList').innerHTML = state.services.map(function(s,i){
+      return '<div class="afield"><label>Servicio '+(i+1)+' — título en inglés</label><input class="svc-en-title" data-i="'+i+'" value="'+esc(s.titleEn||'')+'">'+
+        '<label style="margin-top:8px">Servicio '+(i+1)+' — descripción en inglés</label><textarea class="svc-en-desc" data-i="'+i+'">'+esc(s.descEn||'')+'</textarea></div>';
+    }).join('');
+
+    document.getElementById('projectsEnList').innerHTML = state.projects.map(function(p){
+      return '<div class="afield"><label>'+esc(p.title)+' — categoría en inglés</label><input class="proj-en-cat" data-id="'+p.id+'" value="'+esc(p.categoryEn||'')+'">'+
+        '<label style="margin-top:8px">'+esc(p.title)+' — descripción en inglés</label><textarea class="proj-en-desc" data-id="'+p.id+'">'+esc(p.descEn||'')+'</textarea></div>';
+    }).join('');
+  }
+
+  document.getElementById('saveIngles').addEventListener('click', function(){
+    state.en.heroEyebrow = document.getElementById('fe-heroEyebrow').value.trim();
+    state.en.heroTitle = document.getElementById('fe-heroTitle').value.trim();
+    state.en.heroSub = document.getElementById('fe-heroSub').value.trim();
+    state.en.statement = document.getElementById('fe-statement').value.trim();
+    state.en.servEyebrow = document.getElementById('fe-servEyebrow').value.trim();
+    state.en.servHeading = document.getElementById('fe-servHeading').value.trim();
+    state.en.projEyebrow = document.getElementById('fe-projEyebrow').value.trim();
+    state.en.projHeading = document.getElementById('fe-projHeading').value.trim();
+    state.en.estudioEyebrow = document.getElementById('fe-estudioEyebrow').value.trim();
+    state.en.estudio = document.getElementById('fe-estudio').value.trim();
+    state.en.contactEyebrow = document.getElementById('fe-contactEyebrow').value.trim();
+    state.en.contactHeading = document.getElementById('fe-contactHeading').value.trim();
+    state.en.contactLocation = document.getElementById('fe-contactLocation').value.trim();
+    state.en.footerLine = document.getElementById('fe-footerLine').value.trim();
+
+    document.querySelectorAll('.svc-en-title').forEach(function(el){
+      state.services[+el.getAttribute('data-i')].titleEn = el.value.trim();
+    });
+    document.querySelectorAll('.svc-en-desc').forEach(function(el){
+      state.services[+el.getAttribute('data-i')].descEn = el.value.trim();
+    });
+    document.querySelectorAll('.proj-en-cat').forEach(function(el){
+      var p = state.projects.find(function(x){ return x.id === el.getAttribute('data-id'); });
+      if(p) p.categoryEn = el.value.trim();
+    });
+    document.querySelectorAll('.proj-en-desc').forEach(function(el){
+      var p = state.projects.find(function(x){ return x.id === el.getAttribute('data-id'); });
+      if(p) p.descEn = el.value.trim();
+    });
+
+    render();
+    saveState('Traducción guardada');
+  });
+
+  document.querySelectorAll('.admin-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.admin-tab').forEach(function(t){ t.classList.remove('active'); });
+      document.querySelectorAll('.admin-section').forEach(function(s){ s.classList.remove('active'); });
+      tab.classList.add('active');
+      document.getElementById('tab-'+tab.getAttribute('data-tab')).classList.add('active');
+    });
+  });
+
+  // ---------- DISEÑO TAB ----------
+  var currentDesignPage = 'inicio';
+  var designInputs = {
+    bg:document.getElementById('d-bg'), bg2:document.getElementById('d-bg2'),
+    text:document.getElementById('d-text'), textSoft:document.getElementById('d-textsoft'),
+    line:document.getElementById('d-line'),
+    brass:document.getElementById('d-brass'), brassSoft:document.getElementById('d-brasssoft'),
+    darkBg:document.getElementById('d-darkbg'), darkText:document.getElementById('d-darktext'),
+    darkTextSoft:document.getElementById('d-darktextsoft')
+  };
+  var dHoverPage = document.getElementById('d-hoverpage');
+  var hoverPageField = document.getElementById('hoverPageField');
+  var hoverPageLabel = document.getElementById('hoverPageLabel');
+  var dFont = document.getElementById('d-font'), fontScaleOut = document.getElementById('fontScaleOut');
+  var dHoverNav = document.getElementById('d-hovernav');
+  var dHoverEnabled = document.getElementById('d-hoverenabled');
+  var PAGE_LABELS = { inicio:'Inicio', servicios:'Servicios', proyectos:'Proyectos', estudio:'Estudio', contacto:'Contacto' };
+
+  function fillDesignInputs(){
+    var d = state.design.pages[currentDesignPage];
+    Object.keys(designInputs).forEach(function(k){ designInputs[k].value = d[k]; });
+    dFont.value = d.fontScale;
+    fontScaleOut.textContent = Math.round(d.fontScale*100)+'%';
+    var hasHover = !!HOVER_VAR_BY_PAGE[currentDesignPage];
+    hoverPageField.style.display = hasHover ? '' : 'none';
+    hoverPageLabel.style.display = hasHover ? '' : 'none';
+    if(hasHover) dHoverPage.value = d.hoverColor || '#6B6E3E';
+    dHoverNav.value = state.design.global.hoverNav;
+    dHoverEnabled.checked = state.design.global.hoverEnabled !== false;
+  }
+
+  function livePreviewDesign(){
+    var d = state.design.pages[currentDesignPage];
+    Object.keys(designInputs).forEach(function(k){ d[k] = designInputs[k].value; });
+    d.fontScale = parseFloat(dFont.value);
+    if(HOVER_VAR_BY_PAGE[currentDesignPage]) d.hoverColor = dHoverPage.value;
+    state.design.global.hoverNav = dHoverNav.value;
+    state.design.global.hoverEnabled = dHoverEnabled.checked;
+    fontScaleOut.textContent = Math.round(d.fontScale*100)+'%';
+    applyDesign();
+    // La vista previa vive fuera de las páginas, así que se pinta aparte con la página que se está editando.
+    applyDesignForPage(currentDesignPage, document.getElementById('designPreview'));
+  }
+
+  Object.keys(designInputs).forEach(function(k){ designInputs[k].addEventListener('input', livePreviewDesign); });
+  dHoverPage.addEventListener('input', livePreviewDesign);
+  dFont.addEventListener('input', livePreviewDesign);
+  dHoverNav.addEventListener('input', livePreviewDesign);
+  dHoverEnabled.addEventListener('change', livePreviewDesign);
+
+  document.querySelectorAll('.design-page-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      currentDesignPage = tab.getAttribute('data-page');
+      document.querySelectorAll('.design-page-tab').forEach(function(t){ t.classList.toggle('active', t===tab); });
+      fillDesignInputs();
+      applyDesignForPage(currentDesignPage, document.getElementById('designPreview'));
+    });
+  });
+  (function initDesignTabs(){
+    var first = document.querySelector('.design-page-tab[data-page="inicio"]');
+    if(first) first.classList.add('active');
+  })();
+
+  document.getElementById('saveDiseno').addEventListener('click', function(){
+    saveState('Diseño de ' + PAGE_LABELS[currentDesignPage] + ' guardado');
+  });
+  document.getElementById('resetDiseno').addEventListener('click', function(){
+    state.design.pages[currentDesignPage] = JSON.parse(JSON.stringify(DEFAULTS.design.pages[currentDesignPage]));
+    applyDesign();
+    fillDesignInputs();
+    applyDesignForPage(currentDesignPage, document.getElementById('designPreview'));
+    saveState(PAGE_LABELS[currentDesignPage] + ' restablecido');
+  });
+  document.getElementById('saveGlobalDesign').addEventListener('click', function(){
+    saveState('Ajustes globales guardados');
+  });
+
+  document.getElementById('saveTextos').addEventListener('click', function(){
+    state.heroEyebrow = document.getElementById('f-heroEyebrow').value.trim() || DEFAULTS.heroEyebrow;
+    state.heroTitle = document.getElementById('f-heroTitle').value.trim() || DEFAULTS.heroTitle;
+    state.heroSub = document.getElementById('f-heroSub').value.trim() || DEFAULTS.heroSub;
+    state.heroImg = document.getElementById('f-heroImg').value.trim() || DEFAULTS.heroImg;
+    state.serviciosImg = document.getElementById('f-serviciosImg').value.trim() || DEFAULTS.serviciosImg;
+    state.proyectosImg = document.getElementById('f-proyectosImg').value.trim() || DEFAULTS.proyectosImg;
+    state.estudioImg = document.getElementById('f-estudioImg').value.trim() || DEFAULTS.estudioImg;
+    state.estudioPersonImg = document.getElementById('f-estudioPersonImg').value.trim() || DEFAULTS.estudioPersonImg;
+    state.contactoImg = document.getElementById('f-contactoImg').value.trim() || DEFAULTS.contactoImg;
+    state.statement = document.getElementById('f-statement').value.trim() || DEFAULTS.statement;
+    state.servEyebrow = document.getElementById('f-servEyebrow').value.trim() || DEFAULTS.servEyebrow;
+    state.servHeading = document.getElementById('f-servHeading').value.trim() || DEFAULTS.servHeading;
+    state.projEyebrow = document.getElementById('f-projEyebrow').value.trim() || DEFAULTS.projEyebrow;
+    state.projHeading = document.getElementById('f-projHeading').value.trim() || DEFAULTS.projHeading;
+    state.estudioEyebrow = document.getElementById('f-estudioEyebrow').value.trim() || DEFAULTS.estudioEyebrow;
+    state.estudio = document.getElementById('f-estudio').value.trim() || DEFAULTS.estudio;
+    state.contactEyebrow = document.getElementById('f-contactEyebrow').value.trim() || DEFAULTS.contactEyebrow;
+    state.contactHeading = document.getElementById('f-contactHeading').value.trim() || DEFAULTS.contactHeading;
+    state.contactEmail = document.getElementById('f-contactEmail').value.trim() || DEFAULTS.contactEmail;
+    state.contactPhone = document.getElementById('f-contactPhone').value.trim() || DEFAULTS.contactPhone;
+    state.contactPhoneDisplay = document.getElementById('f-contactPhoneDisplay').value.trim() || DEFAULTS.contactPhoneDisplay;
+    state.contactLocation = document.getElementById('f-contactLocation').value.trim() || DEFAULTS.contactLocation;
+    state.whatsappMessage = document.getElementById('f-whatsappMessage').value.trim() || DEFAULTS.whatsappMessage;
+    state.instagramUrl = document.getElementById('f-instagramUrl').value.trim();
+    state.tiktokUrl = document.getElementById('f-tiktokUrl').value.trim();
+    state.footerLine = document.getElementById('f-footerLine').value.trim() || DEFAULTS.footerLine;
+    render();
+    saveState('Textos guardados');
+  });
+
+  function renderAdminProjects(){
+    var list = document.getElementById('projectAdminList');
+    list.innerHTML = state.projects.map(function(p){
+      return '<div class="admin-card" data-id="'+p.id+'">'+
+        '<h4>'+esc(p.title)+'</h4><div class="meta">'+esc(p.category)+' · '+esc(p.year||'')+'</div>'+
+        '<div class="afield"><label>Título</label><input class="pf-title" value="'+esc(p.title)+'"></div>'+
+        '<div class="afield"><label>Categoría</label><input class="pf-category" value="'+esc(p.category)+'"></div>'+
+        '<div class="afield"><label>Año</label><input class="pf-year" value="'+esc(p.year||'')+'"></div>'+
+        '<div class="afield"><label>Imagen de portada (URL)</label><input class="pf-cover" value="'+esc(p.cover)+'"></div>'+
+        '<div class="afield"><label>Descripción</label><textarea class="pf-desc">'+esc(p.desc)+'</textarea></div>'+
+        '<div class="afield"><label>Galería (URLs separadas por coma, opcional)</label><textarea class="pf-gallery">'+esc(p.gallery||'')+'</textarea></div>'+
+        '<button class="abtn primary pf-save">Guardar proyecto</button>'+
+        '<button class="abtn danger pf-delete">Eliminar</button>'+
+      '</div>';
+    }).join('');
+
+    list.querySelectorAll('.admin-card').forEach(function(card){
+      var id = card.getAttribute('data-id');
+      card.querySelector('.pf-save').addEventListener('click', function(){
+        var p = state.projects.find(function(x){ return x.id===id; });
+        p.title = card.querySelector('.pf-title').value.trim() || p.title;
+        p.category = card.querySelector('.pf-category').value.trim();
+        p.year = card.querySelector('.pf-year').value.trim();
+        p.cover = card.querySelector('.pf-cover').value.trim() || p.cover;
+        p.desc = card.querySelector('.pf-desc').value.trim();
+        p.gallery = card.querySelector('.pf-gallery').value.trim();
+        render();
+        saveState('Proyecto actualizado');
+      });
+      card.querySelector('.pf-delete').addEventListener('click', function(){
+        if(!confirm('¿Eliminar este proyecto?')) return;
+        state.projects = state.projects.filter(function(x){ return x.id!==id; });
+        render();
+        saveState('Proyecto eliminado');
+      });
+    });
+  }
+
+  document.getElementById('addProject').addEventListener('click', function(){
+    state.projects.unshift({
+      id: uid(), title:'Nuevo proyecto', category:'Residencial · Render', year: String(new Date().getFullYear()),
+      cover:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1400&auto=format&fit=crop',
+      desc:'Describe aquí el proyecto.', gallery:''
+    });
+    render();
+    saveState('Proyecto agregado');
+  });
+
+  loadState();
+})();
+</script>
+</body>
+</html>
