@@ -802,106 +802,225 @@ body.position-mode [data-draggable]:hover{outline-color:var(--brass)}
 <script>
 (function(){
   var DEFAULTS = {
-    heroEyebrow: "Estudio Rosco — Ciudad de México",
-    heroTitle: "Diseñar es decidir con los ojos.",
-    heroSub: "RENDERIZADO · PLANOS · CONCEPTUALIZACIÓN · RECORRIDOS VIRTUALES",
-    heroImg: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop",
-    serviciosImg: "https://images.unsplash.com/photo-1630920384437-53fba5b39dca?q=80&w=1800&auto=format&fit=crop",
-    proyectosImg: "https://images.unsplash.com/photo-1539778100343-71fcce08a31a?q=80&w=1800&auto=format&fit=crop",
-    estudioImg: "https://images.unsplash.com/photo-1503387837-b154d5074bd2?q=80&w=1800&auto=format&fit=crop",
-    estudioPersonImg: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
-    contactoImg: "https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?q=80&w=1800&auto=format&fit=crop",
-    statement: "No diseñamos imágenes para impresionar. Diseñamos herramientas para decidir. Cada render, plano y recorrido te permite experimentar tu proyecto antes de construirlo.\n\nEn la construcción cuesta caro equivocarse. Por eso, primero se ve.",
-    servEyebrow: "Servicios",
-    servHeading: "Pasa. No hay dos casos iguales.",
-    projEyebrow: "Proyectos",
-    projHeading: "Una selección, no un catálogo",
-    estudioEyebrow: "Estudio",
-    estudio: "Estudio Rosco es un estudio de arquitectura y visualización dedicado al desarrollo de proyectos contemporáneos.\n\nEntendemos la representación arquitectónica no como una imagen final, sino como una herramienta para pensar, validar y comunicar el proyecto antes de su materialización.\n\nCada encargo se aborda como un caso de estudio: una selección limitada de proyectos, atención meticulosa al detalle y un enfoque centrado en la claridad, la funcionalidad y la permanencia.",
-    contactEyebrow: "Contacto",
-    contactHeading: "Toda gran arquitectura comienza con una conversación.",
-    contactEmail: "holaroscoestudio@gmail.com",
-    contactPhone: "5526995348",
-    contactPhoneDisplay: "55 2699 5348",
-    contactLocation: "Ciudad de México, México",
-    whatsappMessage: "Hola, me gustaría platicar sobre un proyecto arquitectónico.",
-    instagramUrl: "",
-    tiktokUrl: "",
-    footerLine: "ESTUDIO ROSCO — ARQUITECTURA · DISEÑO · VISUALIZACIÓN",
-    en: {
-      heroEyebrow: "Estudio Rosco — Mexico City",
-      heroTitle: "Design is deciding with your eyes.",
-      heroSub: "RENDERING · FLOOR PLANS · CONCEPT DESIGN · VIRTUAL WALKTHROUGHS",
-      statement: "We don't design images to impress. We design tools to help you decide. Every render, plan and walkthrough lets you experience your project before you build it.\n\nIn construction, mistakes are costly. That's why you see it first.",
-      servEyebrow: "Services",
-      servHeading: "Come in. No two cases are alike.",
-      projEyebrow: "Projects",
-      projHeading: "A selection, not a catalog",
-      estudioEyebrow: "Studio",
-      estudio: "Estudio Rosco is an architecture and visualization studio dedicated to developing contemporary projects.\n\nWe understand architectural representation not as a final image, but as a tool to think through, validate and communicate the project before it's built.\n\nEvery commission is treated as a case study: a limited selection of projects, meticulous attention to detail, and a focus on clarity, function and permanence.",
-      contactEyebrow: "Contact",
-      contactHeading: "Every great building starts with a conversation.",
-      contactLocation: "Mexico City, Mexico",
-      footerLine: "ESTUDIO ROSCO — ARCHITECTURE · DESIGN · VISUALIZATION"
+  "heroEyebrow": "Estudio Rosco — Ciudad de México",
+  "heroTitle": "Diseñar es decidir con los ojos.",
+  "heroSub": "RENDERIZADO · PLANOS · CONCEPTUALIZACIÓN · RECORRIDOS VIRTUALES",
+  "heroImg": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop",
+  "serviciosImg": "https://i.imgur.com/ewMmo3p.jpeg",
+  "proyectosImg": "https://images.pexels.com/photos/32229947/pexels-photo-32229947.jpeg",
+  "estudioImg": "https://images.pexels.com/photos/5782900/pexels-photo-5782900.jpeg",
+  "contactoImg": "https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?q=80&w=1800&auto=format&fit=crop",
+  "statement": "No diseñamos imágenes para impresionar. Diseñamos herramientas para decidir. Cada render, plano y recorrido te permite experimentar tu proyecto antes de construirlo.\n\nEn la construcción cuesta caro equivocarse. Por eso, primero se ve.",
+  "servEyebrow": "Servicios",
+  "servHeading": "Pasa. No hay dos casos iguales.",
+  "projEyebrow": "Proyectos",
+  "projHeading": "Una selección, no un catálogo",
+  "estudioEyebrow": "Estudio",
+  "estudio": "Estudio Rosco es un estudio de arquitectura y visualización dedicado al desarrollo de proyectos contemporáneos.\n\nEntendemos la representación arquitectónica no como una imagen final, sino como una herramienta para pensar, validar y comunicar el proyecto antes de su materialización.\n\nCada encargo se aborda como un caso de estudio: una selección limitada de proyectos, atención meticulosa al detalle y un enfoque centrado en la claridad, la funcionalidad y la permanencia.",
+  "contactEyebrow": "Contacto",
+  "contactHeading": "Toda gran arquitectura comienza con una conversación.",
+  "contactEmail": "holaroscoestudio@gmail.com",
+  "contactPhone": "5526995348",
+  "contactPhoneDisplay": "55 2699 5348",
+  "contactLocation": "Ciudad de México, México",
+  "whatsappMessage": "Hola, me gustaría platicar sobre un proyecto arquitectónico.",
+  "instagramUrl": "",
+  "tiktokUrl": "",
+  "footerLine": "ESTUDIO ROSCO — ARQUITECTURA · DISEÑO · VISUALIZACIÓN",
+  "en": {
+    "heroEyebrow": "Estudio Rosco — Mexico City",
+    "heroTitle": "Design is deciding with your eyes.",
+    "heroSub": "RENDERING · FLOOR PLANS · CONCEPT DESIGN · VIRTUAL WALKTHROUGHS",
+    "statement": "We don't design images to impress. We design tools to help you decide. Every render, plan and walkthrough lets you experience your project before you build it.\n\nIn construction, mistakes are costly. That's why you see it first.",
+    "servEyebrow": "Services",
+    "servHeading": "Come in. No two cases are alike.",
+    "projEyebrow": "Projects",
+    "projHeading": "A selection, not a catalog",
+    "estudioEyebrow": "Studio",
+    "estudio": "Estudio Rosco is an architecture and visualization studio dedicated to developing contemporary projects.\n\nWe understand architectural representation not as a final image, but as a tool to think through, validate and communicate the project before it's built.\n\nEvery commission is treated as a case study: a limited selection of projects, meticulous attention to detail, and a focus on clarity, function and permanence.",
+    "contactEyebrow": "Contact",
+    "contactHeading": "Every great building starts with a conversation.",
+    "contactLocation": "Mexico City, Mexico",
+    "footerLine": "ESTUDIO ROSCO — ARCHITECTURE · DESIGN · VISUALIZATION"
+  },
+  "positions": {
+    "statementText": {
+      "x": 16,
+      "y": 482,
+      "scale": 0.7,
+      "justify": true
     },
-    positions: {},
-    design: (function(){
-      var basePage = {
-        bg:"#FAFAF8", bg2:"#EAE8E3",
-        text:"#141311", textSoft:"#5A584F", line:"#D9D6CE",
-        brass:"#141311", brassSoft:"#8C897D",
-        darkBg:"#141311", darkText:"#FAFAF8", darkTextSoft:"#8C897D",
-        fontScale:1
-      };
-      function pg(hover){ var o = Object.assign({}, basePage); if(hover) o.hoverColor = hover; return o; }
-      return {
-        global: { hoverNav:"#6B6E3E", hoverEnabled:true },
-        pages: {
-          inicio: pg(null),
-          servicios: pg("#6B6E3E"),
-          proyectos: pg("#AC9F81"),
-          estudio: pg("#9FAA8A"),
-          contacto: pg("#9FAA8A")
-        }
-      };
-    })(),
-    services: [
-      {title:"Renderizado arquitectónico", desc:"Imágenes fotorrealistas que comunican materialidad, luz y atmósfera antes de la obra.", titleEn:"Architectural rendering", descEn:"Photorealistic images that communicate materiality, light and atmosphere before construction."},
-      {title:"Planos y documentación", desc:"Plantas, cortes y fachadas técnicas, listas para construcción o permisos.", titleEn:"Plans & documentation", descEn:"Floor plans, sections and elevations, ready for construction or permitting."},
-      {title:"Conceptualización", desc:"Del programa arquitectónico a la primera idea espacial, con criterio y referencia.", titleEn:"Concept design", descEn:"From architectural program to the first spatial idea, with judgment and reference."},
-      {title:"Recorridos virtuales", desc:"Experiencias 3D interactivas para caminar el proyecto antes de que exista.", titleEn:"Virtual walkthroughs", descEn:"Interactive 3D experiences to walk through the project before it exists."},
-      {title:"Anteproyecto integral", desc:"Acompañamiento desde el primer boceto hasta el set completo de planos y visualización.", titleEn:"Full pre-project", descEn:"Support from the first sketch through the complete set of drawings and visualization."}
-    ],
-    projects: [
-      {
-        title:"Casa Sayavedra", category:"Residencial · Render", year:"2026",
-        cover:"https://i.imgur.com/yNnMwEY.jpeg",
-        desc:"Ampliación residencial de tres niveles para una vivienda familiar, con bodega de vinos, sala de cata, jardín interior y biblioteca. Desarrollo completo de visualización fotorrealista para acompañar el proceso de obra.",
-        gallery:"https://i.imgur.com/x9uggIY.jpeg,https://i.imgur.com/0au28Lz.jpeg",
-        id:"p1783633629155592",
-        categoryEn:"Residential · Rendering",
-        descEn:"Three-level residential addition for a family home, with a wine cellar, tasting room, interior garden and library. Full photorealistic visualization developed to support the construction process."
+    "heroEyebrow": {
+      "x": -2,
+      "y": -68
+    },
+    "heroTitle": {
+      "x": -14,
+      "y": -74
+    },
+    "heroSub": {
+      "x": -6,
+      "y": -80
+    },
+    "estudioText": {
+      "x": -2,
+      "y": 17,
+      "justify": true,
+      "scale": 1.1
+    },
+    "estudioEyebrow": {
+      "x": 174,
+      "y": 26,
+      "scale": 1.1,
+      "w": 90
+    }
+  },
+  "design": {
+    "global": {
+      "hoverNav": "#c3c3c1",
+      "hoverEnabled": true
+    },
+    "pages": {
+      "inicio": {
+        "bg": "#fafaf8",
+        "bg2": "#eae8e3",
+        "text": "#141311",
+        "textSoft": "#403f3f",
+        "line": "#d9d6ce",
+        "brass": "#141311",
+        "brassSoft": "#c9c487",
+        "darkBg": "#141311",
+        "darkText": "#fafaf8",
+        "darkTextSoft": "#8c897d",
+        "fontScale": 1
       },
-      {
-        title:"Arrebol Tlalpan", category:"Departamentos · Anteproyecto", year:"2025",
-        cover:"https://i.imgur.com/gpzuTys.jpeg",
-        desc:"Desarrollo de un edificio residencial de mediana densidad, concebido mediante una composición volumétrica sobria y una materialidad cálida que combina piedra natural, madera y elementos metálicos. El proyecto busca generar espacios habitacionales eficientes, luminosos y vinculados visualmente con su contexto.",
-        gallery:"https://i.imgur.com/ikoD9Ir.jpeg,https://i.imgur.com/N5drgjg.jpeg",
-        id:"p1783633629155215",
-        categoryEn:"Apartments · Pre-project",
-        descEn:"Development of a mid-density residential building, conceived through a sober volumetric composition and a warm materiality combining natural stone, wood and metal elements. The project aims to create efficient, light-filled housing spaces visually connected to their context."
+      "servicios": {
+        "bg": "#000000",
+        "bg2": "#525151",
+        "text": "#ffffff",
+        "textSoft": "#ffffff",
+        "line": "#d9d6ce",
+        "brass": "#ffffff",
+        "brassSoft": "#8c897d",
+        "darkBg": "#141311",
+        "darkText": "#000000",
+        "darkTextSoft": "#ffffff",
+        "fontScale": 1,
+        "hoverColor": "#b6b6af"
       },
-      {
-        title:"Bosco", category:"Centro Comercial · Conceptualización", year:"2025",
-        cover:"https://i.imgur.com/ocZ76Ef.jpeg",
-        desc:"Conceptualización de un centro comercial contemporáneo compuesto por pabellones modulares y una envolvente de alta transparencia. El proyecto integra arquitectura y paisaje para generar una experiencia comercial abierta, flexible y luminosa, donde el recorrido peatonal y la relación con el entorno se convierten en los principales elementos de diseño.",
-        gallery:"https://i.imgur.com/H663oPG.jpeg,https://i.imgur.com/SXB3qkT.jpeg",
-        id:"p1783633629155381",
-        categoryEn:"Shopping Center · Concept Design",
-        descEn:"Concept design for a contemporary shopping center made up of modular pavilions and a highly transparent envelope. The project integrates architecture and landscape to create an open, flexible, light-filled retail experience, where the pedestrian route and the relationship with the surroundings become the main design elements."
+      "proyectos": {
+        "bg": "#000000",
+        "bg2": "#eae8e3",
+        "text": "#ffffff",
+        "textSoft": "#ffffff",
+        "line": "#f0b000",
+        "brass": "#ffffff",
+        "brassSoft": "#ffcc00",
+        "darkBg": "#141311",
+        "darkText": "#fafaf8",
+        "darkTextSoft": "#ffcc00",
+        "fontScale": 1,
+        "hoverColor": "#ac9f81"
+      },
+      "estudio": {
+        "bg": "#434242",
+        "bg2": "#474747",
+        "text": "#ffffff",
+        "textSoft": "#ffffff",
+        "line": "#d9d6ce",
+        "brass": "#ffffff",
+        "brassSoft": "#ffffff",
+        "darkBg": "#141311",
+        "darkText": "#fafaf8",
+        "darkTextSoft": "#4d4d4c",
+        "fontScale": 1,
+        "hoverColor": "#000000"
+      },
+      "contacto": {
+        "bg": "#FAFAF8",
+        "bg2": "#EAE8E3",
+        "text": "#141311",
+        "textSoft": "#5A584F",
+        "line": "#D9D6CE",
+        "brass": "#141311",
+        "brassSoft": "#8C897D",
+        "darkBg": "#141311",
+        "darkText": "#FAFAF8",
+        "darkTextSoft": "#8C897D",
+        "fontScale": 1,
+        "hoverColor": "#9FAA8A"
       }
-    ]
-  };
+    }
+  },
+  "services": [
+    {
+      "title": "Renderizado arquitectónico",
+      "desc": "Imágenes fotorrealistas que comunican materialidad, luz y atmósfera antes de la obra.",
+      "titleEn": "Architectural rendering",
+      "descEn": "Photorealistic images that communicate materiality, light and atmosphere before construction."
+    },
+    {
+      "title": "Planos y documentación",
+      "desc": "Plantas, cortes y fachadas técnicas, listas para construcción o permisos.",
+      "titleEn": "Plans & documentation",
+      "descEn": "Floor plans, sections and elevations, ready for construction or permitting."
+    },
+    {
+      "title": "Conceptualización",
+      "desc": "Del programa arquitectónico a la primera idea espacial, con criterio y referencia.",
+      "titleEn": "Concept design",
+      "descEn": "From architectural program to the first spatial idea, with judgment and reference."
+    },
+    {
+      "title": "Recorridos virtuales",
+      "desc": "Experiencias 3D interactivas para caminar el proyecto antes de que exista.",
+      "titleEn": "Virtual walkthroughs",
+      "descEn": "Interactive 3D experiences to walk through the project before it exists."
+    },
+    {
+      "title": "Anteproyecto integral",
+      "desc": "Acompañamiento desde el primer boceto hasta el set completo de planos y visualización.",
+      "titleEn": "Full pre-project",
+      "descEn": "Support from the first sketch through the complete set of drawings and visualization."
+    }
+  ],
+  "projects": [
+    {
+      "title": "Casa Sayavedra",
+      "category": "Residencial · Render",
+      "year": "2026",
+      "cover": "https://i.imgur.com/yNnMwEY.jpeg",
+      "desc": "Ampliación residencial de tres niveles para una vivienda familiar, con bodega de vinos, sala de cata, jardín interior y biblioteca. Desarrollo completo de visualización fotorrealista para acompañar el proceso de obra.",
+      "gallery": "https://i.imgur.com/x9uggIY.jpeg,https://i.imgur.com/0au28Lz.jpeg",
+      "id": "p1783633629155592",
+      "categoryEn": "Residential · Rendering",
+      "descEn": "Three-level residential addition for a family home, with a wine cellar, tasting room, interior garden and library. Full photorealistic visualization developed to support the construction process."
+    },
+    {
+      "title": "Arrebol Tlalpan",
+      "category": "Departamentos · Anteproyecto",
+      "year": "2025",
+      "cover": "https://i.imgur.com/gpzuTys.jpeg",
+      "desc": "Desarrollo de un edificio residencial de mediana densidad, concebido mediante una composición volumétrica sobria y una materialidad cálida que combina piedra natural, madera y elementos metálicos. El proyecto busca generar espacios habitacionales eficientes, luminosos y vinculados visualmente con su contexto.",
+      "gallery": "https://i.imgur.com/ikoD9Ir.jpeg,https://i.imgur.com/N5drgjg.jpeg",
+      "id": "p1783633629155215",
+      "categoryEn": "Apartments · Pre-project",
+      "descEn": "Development of a mid-density residential building, conceived through a sober volumetric composition and a warm materiality combining natural stone, wood and metal elements. The project aims to create efficient, light-filled housing spaces visually connected to their context."
+    },
+    {
+      "title": "Bosco",
+      "category": "Centro Comercial · Conceptualización",
+      "year": "2025",
+      "cover": "https://i.imgur.com/ocZ76Ef.jpeg",
+      "desc": "Conceptualización de un centro comercial contemporáneo compuesto por pabellones modulares y una envolvente de alta transparencia. El proyecto integra arquitectura y paisaje para generar una experiencia comercial abierta, flexible y luminosa, donde el recorrido peatonal y la relación con el entorno se convierten en los principales elementos de diseño.",
+      "gallery": "https://i.imgur.com/H663oPG.jpeg,https://i.imgur.com/SXB3qkT.jpeg",
+      "id": "p1783633629155381",
+      "categoryEn": "Shopping Center · Concept Design",
+      "descEn": "Concept design for a contemporary shopping center made up of modular pavilions and a highly transparent envelope. The project integrates architecture and landscape to create an open, flexible, light-filled retail experience, where the pedestrian route and the relationship with the surroundings become the main design elements."
+    }
+  ],
+  "estudioPersonImg": "https://i.imgur.com/lQciDB3.jpeg"
+};
 
   var state = null;
   var currentLang = sessionStorage.getItem('rosco-lang') || 'es';
