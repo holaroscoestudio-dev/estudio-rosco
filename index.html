@@ -362,6 +362,7 @@ footer{padding:36px 0;background:var(--dark-bg);color:var(--dark-text-soft);curs
 [data-draggable]{transition:outline-color .2s}
 body.position-mode [data-draggable]{cursor:grab;outline:1px dashed transparent;outline-offset:6px;border-radius:2px}
 body.position-mode [data-draggable]:hover{outline-color:var(--brass)}
+body.position-mode [data-draggable]{touch-action:none;-webkit-user-select:none;user-select:none}
 [data-draggable].dragging{cursor:grabbing;outline-color:var(--brass) !important;opacity:.88;position:relative;z-index:80}
 [data-draggable].pos-selected{outline:1px solid var(--brass) !important}
 .pos-toolbar{position:fixed;z-index:200;display:none;gap:6px;align-items:center;background:#141311;color:#FAFAF8;padding:7px 9px;border-radius:7px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.03em;box-shadow:0 8px 24px rgba(0,0,0,.3);white-space:nowrap}
@@ -602,7 +603,7 @@ body.position-mode .pub-float{display:none !important}
 </div>
 
 <div class="pos-bar" id="posBar" role="status">
-  <span>Modo mover — arrastra cualquier texto marcado con borde punteado</span>
+  <span id="posModeLabel">Modo mover — arrastra cualquier texto marcado con borde punteado</span>
   <button id="resetPositions">Restablecer posiciones</button>
   <button id="posPublish">Publicar cambios</button>
   <button id="exitPositionMode">Salir</button>
@@ -1054,7 +1055,7 @@ body.position-mode .pub-float{display:none !important}
     state = chosen;
     state.projects.forEach(function(p){ if(!p.id) p.id = uid(); });
     state.design = migrateDesign(state.design);
-    state.positions = Object.assign({}, state.positions||{});
+    state.positions = Object.assign({}, state.positions||{}); state.positionsMobile = Object.assign({}, state.positionsMobile||{});
     state.en = Object.assign({}, DEFAULTS.en, state.en||{});
     if(state.instagramUrl === undefined) state.instagramUrl = '';
     if(state.tiktokUrl === undefined) state.tiktokUrl = '';
@@ -1415,21 +1416,46 @@ body.position-mode .pub-float{display:none !important}
   var posJustifyBtn = document.getElementById('posJustifyBtn');
   var posResizeHandle = document.getElementById('posResizeHandle');
 
+  // Las posiciones se guardan por separado para computadora y celular,
+  // porque el diseño cambia de forma entre uno y otro.
+  var MOBILE_BP = 780;
+  function posSetName(){ return window.innerWidth < MOBILE_BP ? 'positionsMobile' : 'positions'; }
+  function posSet(){
+    var n = posSetName();
+    if(!state[n]) state[n] = {};
+    return state[n];
+  }
+  function updatePosLabel(){
+    var el = document.getElementById('posModeLabel');
+    if(!el) return;
+    el.textContent = 'Modo mover — versión de ' + (posSetName() === 'positionsMobile' ? 'celular' : 'computadora') + ': arrastra cualquier texto marcado con borde punteado';
+  }
+
   function getPos(key){
-    if(!state.positions[key]) state.positions[key] = {x:0,y:0};
-    var p = state.positions[key];
+    var set = posSet();
+    if(!set[key]) set[key] = {x:0,y:0};
+    var p = set[key];
     if(p.x===undefined) p.x = 0;
     if(p.y===undefined) p.y = 0;
+    // Lleva lo guardado al ancho de pantalla actual (solo el eje horizontal).
+    var k = p.vw ? window.innerWidth / p.vw : 1;
+    if(k !== 1){
+      p.x = Math.round(p.x * k);
+      if(p.w) p.w = Math.round(p.w * k);
+    }
+    p.vw = window.innerWidth;
     return p;
   }
 
   function applyElementStyle(key){
     var el = document.getElementById(key);
     if(!el) return;
-    var p = state.positions[key];
+    var p = posSet()[key];
     if(!p){ el.style.transform=''; el.style.width=''; el.style.maxWidth=''; el.style.fontSize=''; el.style.textAlign=''; return; }
-    el.style.transform = (p.x || p.y) ? 'translate('+p.x+'px,'+p.y+'px)' : '';
-    if(p.w){ el.style.width = p.w+'px'; el.style.maxWidth = p.w+'px'; }
+    var k = p.vw ? window.innerWidth / p.vw : 1;
+    var px = Math.round((p.x || 0) * k), py = p.y || 0, pw = p.w ? Math.round(p.w * k) : 0;
+    el.style.transform = (px || py) ? 'translate('+px+'px,'+py+'px)' : '';
+    if(pw){ el.style.width = pw+'px'; el.style.maxWidth = pw+'px'; }
     else { el.style.width=''; el.style.maxWidth=''; }
     el.style.fontSize = '';
     if(p.scale && p.scale !== 1){
@@ -1596,7 +1622,13 @@ body.position-mode .pub-float{display:none !important}
     if(e.target.closest('[data-draggable]') || e.target.closest('#posToolbar') || e.target === posResizeHandle) return;
     deselectElement();
   });
-  window.addEventListener('resize', function(){ if(selectedKey) updateToolbarPosition(); });
+  var lastPosSetName = posSetName();
+  window.addEventListener('resize', function(){
+    var now = posSetName();
+    if(now !== lastPosSetName){ lastPosSetName = now; deselectElement(); updatePosLabel(); }
+    applyPositions();
+    if(selectedKey) updateToolbarPosition();
+  });
 
 
   function openLightbox(id){
@@ -1814,6 +1846,7 @@ body.position-mode .pub-float{display:none !important}
   document.getElementById('startPositionMode').addEventListener('click', function(){
     closeAdmin();
     document.body.classList.add('position-mode');
+    updatePosLabel();
     posBar.classList.add('show');
   });
   document.getElementById('exitPositionMode').addEventListener('click', function(){
@@ -1822,8 +1855,8 @@ body.position-mode .pub-float{display:none !important}
     deselectElement();
   });
   document.getElementById('resetPositions').addEventListener('click', function(){
-    if(!confirm('¿Restablecer todos los textos a su posición, tamaño y ancho original?')) return;
-    state.positions = {};
+    if(!confirm('¿Restablecer los textos de esta versión (computadora o celular) a su posición, tamaño y ancho original?')) return;
+    state[posSetName()] = {};
     deselectElement();
     applyPositions();
     saveState('Posiciones restablecidas');
@@ -1851,7 +1884,7 @@ body.position-mode .pub-float{display:none !important}
       state.projects = state.projects || [];
       state.projects.forEach(function(p){ if(!p.id) p.id = uid(); });
       state.design = migrateDesign(state.design);
-      state.positions = Object.assign({}, state.positions||{});
+      state.positions = Object.assign({}, state.positions||{}); state.positionsMobile = Object.assign({}, state.positionsMobile||{});
       applyDesign();
       render();
       saveState('Respaldo restaurado');
