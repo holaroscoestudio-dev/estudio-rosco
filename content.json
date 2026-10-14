@@ -42,23 +42,27 @@
   },
   "positions": {
     "statementText": {
-      "x": -1233,
-      "y": 594,
-      "scale": 0.7,
+      "x": -53,
+      "y": 565,
+      "scale": 0.6,
       "justify": true,
-      "w": 502
+      "w": 427,
+      "vw": 1920
     },
     "heroEyebrow": {
       "x": 3,
-      "y": -254
+      "y": -156,
+      "vw": 1920
     },
     "heroTitle": {
-      "x": -15,
-      "y": -235
+      "x": -11,
+      "y": -160,
+      "vw": 1920
     },
     "heroSub": {
-      "x": -3,
-      "y": -204
+      "x": -1,
+      "y": -163,
+      "vw": 1920
     },
     "estudioText": {
       "x": -2,
@@ -217,5 +221,6 @@
       "descEn": "Concept design for a contemporary shopping center made up of modular pavilions and a highly transparent envelope. The project integrates architecture and landscape to create an open, flexible, light-filled retail experience, where the pedestrian route and the relationship with the surroundings become the main design elements."
     }
   ],
-  "estudioPersonImg": "https://i.imgur.com/lQciDB3.jpeg"
+  "estudioPersonImg": "https://i.imgur.com/lQciDB3.jpeg",
+  "positionsMobile": {}
 }
