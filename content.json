@@ -42,22 +42,22 @@
   },
   "positions": {
     "statementText": {
-      "x": 16,
-      "y": 482,
+      "x": -1456,
+      "y": 584,
       "scale": 0.7,
       "justify": true
     },
     "heroEyebrow": {
-      "x": -2,
-      "y": -68
+      "x": 3,
+      "y": -254
     },
     "heroTitle": {
-      "x": -14,
-      "y": -74
+      "x": -15,
+      "y": -235
     },
     "heroSub": {
-      "x": -6,
-      "y": -80
+      "x": -3,
+      "y": -204
     },
     "estudioText": {
       "x": -2,
