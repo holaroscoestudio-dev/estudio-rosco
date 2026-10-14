@@ -42,11 +42,11 @@
   },
   "positions": {
     "statementText": {
-      "x": -1208,
-      "y": 584,
+      "x": -1192,
+      "y": 604,
       "scale": 0.7,
       "justify": true,
-      "w": 481
+      "w": 549
     },
     "heroEyebrow": {
       "x": 3,
